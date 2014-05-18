@@ -1,0 +1,21 @@
+; $Id: grounation.cur,v 1.2 2005/05/14 07:23:31 smoli Exp $
+;
+; The Graphics for these cursors are taken from the 
+; "Grounation Cursor Theme" for X11 by Laszlo Dvornik
+;
+; Note that this cursor theme is GPLed unlike libsgui itself
+; which is LGPL. Keep this in mind when you redistribute!
+
+grounation.png:Grounation
+
+; Format is as following:
+;
+; <type>:<x>,<y>/<w>x<h>/<hotx>|<hoty>
+;
+0:0,0/32x32/5|3
+1:32,0/32x32/16|12
+2:64,0/32x32/16|12
+3:96,0/32x32/16|12
+4:128,0/32x32/16|12
+5:160,0/32x32/16|12
+6:192,0/32x32/16|12

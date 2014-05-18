@@ -1,0 +1,37 @@
+.TH "sgWidgetFace" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgWidgetFace \- Widget surface data.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <widget.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "SDL_Surface * \fBborder\fP"
+.br
+.RI "\fItransparent border stuff \fP"
+.ti -1c
+.RI "SDL_Surface * \fBframe\fP"
+.br
+.RI "\fIpaletted frames \fP"
+.ti -1c
+.RI "SDL_Surface * \fBcontent\fP"
+.br
+.RI "\fI32-bit surface for fonts and images \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Widget surface data. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

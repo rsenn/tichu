@@ -1,0 +1,86 @@
+# $Id: Makefile.in,v 1.11 2005/04/15 06:16:29 smoli Exp $
+# ===========================================================================
+#
+# GNU Makefile for tichu-server
+#
+# relative directories
+# ---------------------------------------------------------------------------
+srcdir       = @srcdir@
+top_srcdir   = @top_srcdir@
+builddir     = @builddir@
+top_builddir = @top_builddir@
+thisdir      =
+
+ac_configure_args = @ac_configure_args@
+MAKEFLAGS = @MAKEFLAGS@
+
+# include global make configuration
+# ---------------------------------------------------------------------------
+include $(top_builddir)config.mk
+
+#############################################################################
+#                                    ########################################
+#  ROOT & RECURSIVE CONFIGURATION    ########################################
+#                                    ########################################
+#############################################################################
+
+# redirect to recursive targets
+# ---------------------------------------------------------------------------
+all:              bootfiles makefiles all-recursive 
+clean:            bootfiles makefiles clean-recursive
+distclean:        bootfiles makefiles distclean-recursive
+maintainer-clean: bootfiles makefiles maintainer-clean-recursive
+install:          bootfiles makefiles install-recursive
+dep:              bootfiles makefiles dep-recursive
+
+RM    = rm -f
+CHMOD = chmod
+
+bootfiles: config.status
+
+# directory configuration
+# ---------------------------------------------------------------------------
+SUBMAKE              = include src modules bot data
+SUBDIRS              = libchaos $(SUBMAKE)
+ROOT                 = 1
+RECURSIVE            = 1
+
+CONFIG_H_IN = $(top_srcdir)/include/libchaos/config.h.in
+CONFIG_H    = $(top_builddir)include/libchaos/config.h
+
+#############################################################################
+#                                    ########################################
+#  LOCAL DIRECTORY CONFIGURATION     ########################################
+#                                    ########################################
+#############################################################################
+
+# targets           build.mk config.h $(srcdir)/configure 
+# ---------------------------------------------------------------------------
+all-local: 
+install-local: install-data install-exec
+dep-local:
+
+# files that go into distribution tarballs
+# ---------------------------------------------------------------------------
+FILES                += Makefile.in config.mk.in build.mk.in configure.in \
+                        COPYING
+
+DISTFILES            += $(FILES) configure aclocal.m4
+                                 
+DEVFILES             += $(FILES) autogen.sh CVS m4
+
+# files to be cleaned
+# ---------------------------------------------------------------------------
+ac_configure_args    = @ac_configure_args@
+CLEANFILES           = *~ \
+                       core core.* mktable mktable.o
+DISTCLEANFILES       = Makefile config.status config.log config.mk build.mk \
+                       config.h $(DEPS)
+MAINTAINERCLEANFILES = aclocal.m4 configure *.bz2 *.gz autom4te.cache \
+                       config.guess config.h.in config.sub install-sh \
+                       ltmain.sh missing mkinstalldirs \
+                       $(PACKAGE) $(PACAKGE)-$(VERSION)
+
+# include global make targets
+# ---------------------------------------------------------------------------
+include $(top_builddir)build.mk

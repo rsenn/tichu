@@ -1,0 +1,114 @@
+# $Id: configure.in,v 1.2 2005/05/09 23:59:10 smoli Exp $
+# ===========================================================================
+#
+# GNU autoconf template for tichu-server
+#
+# initialize autoconf (require version 2.5x)
+# ---------------------------------------------------------------------------
+AC_PREREQ(2.50)
+AC_INIT([libchaos],[2.1.0])
+
+# check for compiling modes
+# ---------------------------------------------------------------------------
+AC_CHECK_COLOR
+
+# set some info stuff
+# ---------------------------------------------------------------------------
+AC_SET_ARGS
+PACKAGE_RELEASE="peace & love hippie edition"
+AC_DEFINE_UNQUOTED(PACKAGE_RELEASE, "$PACKAGE_RELEASE", [Define to the release name of this package.])
+
+VERSION=${PACKAGE_VERSION%%[[a-z]]*}
+
+VERSION_MAJOR=${VERSION%%.[[0-9]]*}
+VERSION_MINOR=${VERSION#*[0-9].}
+VERSION_MINOR=${VERSION_MINOR%.[[0-9]]*}
+VERSION_PATCH=${VERSION##*[0-9].}
+
+AC_SUBST(VERSION_MAJOR)
+AC_SUBST(VERSION_MINOR)
+AC_SUBST(VERSION_PATCH)
+
+CREATION=$(date)
+PLATFORM=$(uname -a)
+AC_DEFINE_UNQUOTED(CREATION, "$CREATION", [Creation time of this server])
+AC_DEFINE_UNQUOTED(PLATFORM, "$PLATFORM", [Platform this server runs on])
+
+# set directories
+# ---------------------------------------------------------------------------
+AC_CONFIG_HEADERS([include/libchaos/config.h])
+AC_CONFIG_SRCDIR([src/mem.c])
+
+# set extensions and flags
+# ---------------------------------------------------------------------------
+SHEXT="so"
+DFLAGS="-g -ggdb"
+WFLAGS="-Wall -Werror"
+FFLAGS=""
+
+# check for libs and programs needed to build tichu-server
+# ---------------------------------------------------------------------------
+AC_DIETLIBC([/opt/diet /usr/diet])
+AC_PROG_CC([cc gcc])
+AC_PROG_AR
+AC_PROG_RANLIB
+AC_PROG_INSTALL
+AC_PROG_LN
+
+# check some system dependencies
+# ---------------------------------------------------------------------------
+AC_CHECK_LIB(m, cos, LIBS="-lm $LIBS")
+
+AC_CANONICAL_HOST
+
+AC_CONFIG_HOST
+AC_CONFIG_DYLIB
+
+AC_CHECK_HEADERS([dlfcn.h])
+
+AC_CHECK_SSL
+AC_CHECK_FT2
+AC_CHECK_PSQL
+AC_CHECK_MYSQL
+
+AC_C_BIGENDIAN([ENDIAN="ENDIAN_BIG"], 
+               [ENDIAN="ENDIAN_LIL"])
+    
+AC_SUBST(ENDIAN)
+AC_DEFINE_UNQUOTED(ENDIAN_LIL, 0, [Little endian machine])
+AC_DEFINE_UNQUOTED(ENDIAN_BIG, 1, [Big endian machine])
+AC_DEFINE_UNQUOTED(ENDIAN, $ENDIAN, [Define your machines endian])
+
+IA32INLINE="0"
+
+# set debugging stuff after compiler test (-Werror could fuck it up)
+# ---------------------------------------------------------------------------
+AC_CHECK_DEP
+AC_CHECK_DEBUG
+AC_CHECK_MAINTAINER
+
+# library subdirectories
+# ---------------------------------------------------------------------------
+AC_CONFIG_FILES([
+Makefile
+config.mk
+build.mk
+include/Makefile
+include/libchaos/Makefile
+servauth/Makefile
+src/Makefile
+test/Makefile])
+
+AC_CONFIG_STATUS
+
+# be verbose :)
+# ---------------------------------------------------------------------------
+AC_SUMMARIZE([prefix bindir datadir includedir],
+             [COLOR DEP DEBUG |
+              CC CFLAGS LDFLAGS LIBS |
+              SSL_CFLAGS SSL_LIBS
+              FT2_CFLAGS FT2_LIBS 
+              PSQL_CFLAGS PSQL_LIBS
+              MYSQL_CFLAGS MYSQL_LIBS |
+              host build],
+             "%20s: %s")

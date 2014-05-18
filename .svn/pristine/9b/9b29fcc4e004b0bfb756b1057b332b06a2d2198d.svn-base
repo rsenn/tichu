@@ -1,0 +1,301 @@
+.TH "sgInput: a line-editing widget" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgInput: a line-editing widget \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgInput\fP"
+.br
+.RI "\fIa specialised structure for the line-editing widget \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgInput\fP(w)   (w)->data.input"
+.br
+.RI "\fIA macro to access the specialised input structure. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgInput\fP \fBsgInput\fP"
+.br
+.RI "\fIData type for input specific storage. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewInputSplitted\fP (\fBsgWidget\fP *based, \fBsgEdge\fP edge, Uint16 pixels, const char *caption)"
+.br
+.RI "\fICreates a new input widget by splitting another. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewInputGrouped\fP (\fBsgWidget\fP *group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new input widget and adds it to a group. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewInput\fP (\fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new input widget. \fP"
+.ti -1c
+.RI "void \fBsgDeleteInput\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIFree history data associated with the widget. \fP"
+.ti -1c
+.RI "void \fBsgRecalcInput\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIRecalculates internal input rectangles. \fP"
+.ti -1c
+.RI "void \fBsgRedrawInput\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIRedraws input widget. \fP"
+.ti -1c
+.RI "int \fBsgHandleInputEvent\fP (\fBsgWidget\fP *input, SDL_Event *event)"
+.br
+.RI "\fIHandles an incoming event for an input widget. \fP"
+.ti -1c
+.RI "void \fBsgSetInputCaption\fP (\fBsgWidget\fP *input, const char *caption)"
+.br
+.RI "\fIChanges the input text. \fP"
+.ti -1c
+.RI "char * \fBsgGetInputCaption\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIGets the input text. \fP"
+.ti -1c
+.RI "int \fBsgInsertInputChar\fP (\fBsgWidget\fP *input, char c)"
+.br
+.RI "\fIInsert a char at the current position. \fP"
+.ti -1c
+.RI "int \fBsgRemoveInputChar\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIRemove a char left of the current position (backspace). \fP"
+.ti -1c
+.RI "int \fBsgDeleteInputChar\fP (\fBsgWidget\fP *input)"
+.br
+.RI "\fIRemove the char at the current position (delete). \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgInputType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the widget. \fP"
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgInputType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the widget. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgWidget\fP* sgNewInputSplitted (\fBsgWidget\fP * based, \fBsgEdge\fP edge, Uint16 pixels, const char * caption)"
+.PP
+Creates a new input widget by splitting another. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbased\fP the widget which we split 
+.br
+\fIedge\fP on which edge «based» will be splitted 
+.br
+\fIpixels\fP how many pixels to split off 
+.br
+\fIcaption\fP initial input text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created input or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewInputGrouped (\fBsgWidget\fP * group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new input widget and adds it to a group. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP group the input will be added to 
+.br
+\fIedge\fP at which edge «group» will be splitted 
+.br
+\fIalign\fP alignment of the input inside the group 
+.br
+\fIw\fP width of the input 
+.br
+\fIh\fP height of the input 
+.br
+\fIcaption\fP initial input text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created input or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewInput (\fBsgWidget\fP * parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new input widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP widget which will contain the input 
+.br
+\fIx\fP x-position of the input relative to the parent 
+.br
+\fIy\fP y-position of the input relative to the parent 
+.br
+\fIw\fP width of the input 
+.br
+\fIh\fP height of the input 
+.br
+\fIcaption\fP initial input text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created input or NULL on error
+.RE
+.PP
+
+.SS "void sgRecalcInput (\fBsgWidget\fP * input)"
+.PP
+Recalculates internal input rectangles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input to recalculate
+.RE
+.PP
+
+.SS "void sgRedrawInput (\fBsgWidget\fP * input)"
+.PP
+Redraws input widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget to redraw
+.RE
+.PP
+
+.SS "int sgHandleInputEvent (\fBsgWidget\fP * input, SDL_Event * event)"
+.PP
+Handles an incoming event for an input widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget which receives the event 
+.br
+\fIevent\fP an SDL_Event structure from SDL_PollEvent()
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 if some action has taken place, 0 otherwise
+.RE
+.PP
+
+.SS "void sgSetInputCaption (\fBsgWidget\fP * input, const char * caption)"
+.PP
+Changes the input text. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget 
+.br
+\fIcaption\fP new input text
+.RE
+.PP
+
+.SS "char* sgGetInputCaption (\fBsgWidget\fP * input)"
+.PP
+Gets the input text. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+input text
+.RE
+.PP
+
+.SS "int sgInsertInputChar (\fBsgWidget\fP * input, char c)"
+.PP
+Insert a char at the current position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget 
+.br
+\fIc\fP the character to insert
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 when the widget has changed, 0 otherwise
+.RE
+.PP
+
+.SS "int sgRemoveInputChar (\fBsgWidget\fP * input)"
+.PP
+Remove a char left of the current position (backspace). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 when the widget has changed, 0 otherwise
+.RE
+.PP
+
+.SS "int sgDeleteInputChar (\fBsgWidget\fP * input)"
+.PP
+Remove the char at the current position (delete). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinput\fP input widget
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 when the widget has changed, 0 otherwise
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBsgWidgetType\fP \fBsgInputType\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .name = 'sgInput',
+  .size = sizeof(sgInput),
+  .methods =
+  {
+    .delete = sgDeleteInput,
+    .recalc = sgRecalcInput,
+    .redraw = sgRedrawInput,
+    .handler = sgHandleInputEvent,
+    .blit = sgBlitWidget
+  }
+}
+.fi
+Configuration and initial methods of the widget. 
+.PP
+

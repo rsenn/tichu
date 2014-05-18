@@ -1,0 +1,37 @@
+.TH "sgPict" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgPict \- Pictogram info and data.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <picts.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "Uint16 \fBw\fP"
+.br
+.RI "\fIpictogram width \fP"
+.ti -1c
+.RI "Uint16 \fBh\fP"
+.br
+.RI "\fIpictogram height \fP"
+.ti -1c
+.RI "Uint8 \fBdata\fP []"
+.br
+.RI "\fIbitmap data \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Pictogram info and data. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

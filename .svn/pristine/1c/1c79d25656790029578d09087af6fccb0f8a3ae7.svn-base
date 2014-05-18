@@ -1,0 +1,204 @@
+.TH "sgGroup: Grouping compound widget" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgGroup: Grouping compound widget \- Grouping compounds can contain several other widgets.  
+
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgGroup\fP"
+.br
+.RI "\fIDefines a specialised structure for a group widget. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgGroup\fP(w)   (w)->data.group"
+.br
+.RI "\fIA macro to access the specialised structure of a group widget. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgGroup\fP \fBsgGroup\fP"
+.br
+.RI "\fIData type for widget-specific storage. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewGroupFull\fP (\fBsgWidget\fP *parent, const char *caption)"
+.br
+.RI "\fICreates a new group widget using full dialog size. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewGroupSplitted\fP (\fBsgWidget\fP *based, \fBsgEdge\fP edge, int pixels, const char *caption)"
+.br
+.RI "\fICreates a new group widget by splitting another. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewGroupRect\fP (\fBsgWidget\fP *parent, SDL_Rect rect, const char *title)"
+.br
+.RI "\fICreates a new group widget from a rectangle. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewGroup\fP (\fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new group widget. \fP"
+.ti -1c
+.RI "void \fBsgRecalcGroup\fP (\fBsgWidget\fP *group)"
+.br
+.RI "\fIRecalc group dimensions. \fP"
+.ti -1c
+.RI "void \fBsgRedrawGroup\fP (\fBsgWidget\fP *group)"
+.br
+.RI "\fIDraws group look. \fP"
+.ti -1c
+.RI "int \fBsgHandleGroupEvent\fP (\fBsgWidget\fP *group, SDL_Event *event)"
+.br
+.RI "\fIHandles events for the group widget. \fP"
+.ti -1c
+.RI "void \fBsgSubGroup\fP (\fBsgWidget\fP *group, \fBsgWidget\fP *add, \fBsgEdge\fP edge, \fBsgAlign\fP align)"
+.br
+.RI "\fIAdds a widget to a group by splitting its dimensions from the 'splitted' rectangle, which has initially the dimensions of the body. \fP"
+.ti -1c
+.RI "void \fBsgAddGroup\fP (\fBsgWidget\fP *group, \fBsgWidget\fP *add, \fBsgEdge\fP edge, \fBsgAlign\fP align)"
+.br
+.RI "\fIAdds a widget to a group by adding its dimensions to the 'aligned' rectangle, which has initially zero dimensions and is aligned inside the body. \fP"
+.ti -1c
+.RI "void \fBsgSetGroupAlign\fP (\fBsgWidget\fP *group, \fBsgAlign\fP align)"
+.br
+.RI "\fISets the alignment of stuff inside the group body. \fP"
+.ti -1c
+.RI "int \fBsgSetGroupImage\fP (\fBsgWidget\fP *group, SDL_Surface *image, \fBsgAlign\fP align)"
+.br
+.RI "\fISets the background image of a group. \fP"
+.ti -1c
+.RI "int \fBsgLoadGroupImage\fP (\fBsgWidget\fP *group, const char *file, \fBsgAlign\fP align)"
+.br
+.RI "\fILoads a background image from a file. \fP"
+.ti -1c
+.RI "Uint16 \fBsgSetGroupTab\fP (\fBsgWidget\fP *group, Uint16 offset)"
+.br
+.RI "\fIModifies the caption rectangle so the group can be used in a tab widget. \fP"
+.ti -1c
+.RI "int \fBsgBlitGroupTab\fP (\fBsgWidget\fP *group, SDL_Surface *surface, Sint16 x, Sint16 y)"
+.br
+.RI "\fIBlits the group, but only the caption unless it has focus. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewGroupAligned\fP (\fBsgWidget\fP *group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char *caption)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgGroupType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the grouping widget. \fP"
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgGroupType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the grouping widget. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Grouping compounds can contain several other widgets. 
+.PP
+They display a frame and optionally a title.
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgWidget\fP * sgNewGroupSplitted (\fBsgWidget\fP * based, \fBsgEdge\fP edge, int pixels, const char * caption)"
+.PP
+Creates a new group widget by splitting another. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbased\fP widget which we'll split 
+.br
+\fIedge\fP at which edge «based» will be splitted 
+.br
+\fIpixels\fP how many pixels to split off 
+.br
+\fIcaption\fP group caption
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created group or NULL on error.
+.RE
+.PP
+
+.SS "void sgSubGroup (\fBsgWidget\fP * group, \fBsgWidget\fP * add, \fBsgEdge\fP edge, \fBsgAlign\fP align)"
+.PP
+Adds a widget to a group by splitting its dimensions from the 'splitted' rectangle, which has initially the dimensions of the body. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP the group we're gonna add a widget to 
+.br
+\fIadd\fP the widget which is added 
+.br
+\fIedge\fP the edge at which we split the 'splitted' rectangle 
+.br
+\fIalign\fP how we align the widget inside the rect we splitted off
+.RE
+.PP
+
+.SS "int sgSetGroupImage (\fBsgWidget\fP * group, SDL_Surface * image, \fBsgAlign\fP align)"
+.PP
+Sets the background image of a group. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP The group that will have its background changed 
+.br
+\fIimage\fP Image data of the new background 
+.br
+\fIalign\fP How the image will be aligned inside the group
+.RE
+.PP
+
+.SS "Uint16 sgSetGroupTab (\fBsgWidget\fP * group, Uint16 offset)"
+.PP
+Modifies the caption rectangle so the group can be used in a tab widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP The group which is beeing modified 
+.br
+\fIoffset\fP Offset at which the caption starts from the left
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Width of the caption rectangle (offset + return value = offset to the next tabgroup)
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBsgWidgetType\fP \fBsgGroupType\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .name = 'sgGroup',
+  .size = sizeof(struct sgGroup),
+  .methods =
+  {
+    .recalc = sgRecalcGroup,
+    .redraw = sgRedrawGroup,
+    .handler = sgHandleGroupEvent,
+    .blit = sgBlitWidget
+  }
+}
+.fi
+Configuration and initial methods of the grouping widget. 
+.PP
+

@@ -1,0 +1,5 @@
+- fix editbox widget
+- bug in event handling when sgDialog -> sgGroup -> sgButton/sgListbox
+- document all remaining stuff (doxygen warnings)
+- clean up and document examples
+- do a website

@@ -1,0 +1,197 @@
+.TH "sgCursor: Mouse cursor handling" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgCursor: Mouse cursor handling \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgCursorFace\fP"
+.br
+.RI "\fIcursor face structure \fP"
+.ti -1c
+.RI "struct \fBsgCursor\fP"
+.br
+.RI "\fIcursor as used in a dialog \fP"
+.ti -1c
+.RI "struct \fBsgCursorTheme\fP"
+.br
+.RI "\fIa set of cursors \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgCursor\fP \fBsgCursor\fP"
+.br
+.RI "\fIper-dialog cursor data \fP"
+.ti -1c
+.RI "typedef \fBsgCursorTheme\fP \fBsgCursorTheme\fP"
+.br
+.RI "\fIset of cursors \fP"
+.ti -1c
+.RI "typedef \fBsgCursorFace\fP \fBsgCursorFace\fP"
+.br
+.RI "\fIcursor look \fP"
+.ti -1c
+.RI "typedef enum \fBsgCursorType\fP \fBsgCursorType\fP"
+.br
+.RI "\fIcursor look id \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBsgCursorType\fP { \fBSG_CURSOR_DEFAULT\fP =  0, \fBSG_CURSOR_MOVE\fP, \fBSG_CURSOR_RESIZE_H\fP, \fBSG_CURSOR_RESIZE_V\fP, \fBSG_CURSOR_RESIZE_HV\fP, \fBSG_CURSOR_RESIZE_VH\fP, \fBSG_CURSOR_EDIT\fP, \fBSG_CURSOR_COUNT\fP }"
+.br
+.RI "\fIcursor type enum \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsgAllocCursorSurface\fP (\fBsgCursorFace\fP *face, Sint16 w, Sint16 h)"
+.br
+.RI "\fIAllocates a new cursor surface, freeing potentially old ones. \fP"
+.ti -1c
+.RI "void \fBsgFreeCursorSurface\fP (\fBsgCursorFace\fP *face)"
+.br
+.RI "\fIFrees cursor face surface if present. \fP"
+.ti -1c
+.RI "void \fBsgSetCursorSurface\fP (\fBsgCursorFace\fP *face, SDL_Surface *surface, Sint16 hotx, Sint16 hoty)"
+.br
+.RI "\fISets a specific cursor surface and its hotspot. \fP"
+.ti -1c
+.RI "void \fBsgCopyCursorSurface\fP (\fBsgCursorFace\fP *face, SDL_Surface *surface)"
+.br
+.RI "\fICopies a specfic region of a surface to a cursor. \fP"
+.ti -1c
+.RI "void \fBsgSetCursorInfo\fP (\fBsgCursorFace\fP *face, SDL_Rect *rect, Sint16 hotx, Sint16 hoty)"
+.br
+.RI "\fISets cursor information as parsed. \fP"
+.ti -1c
+.RI "\fBsgCursorFace\fP * \fBsgGetCursorFace\fP (\fBsgCursor\fP *cursor, \fBsgCursorType\fP face)"
+.br
+.RI "\fIReturns pointer to appropriate cursor face struct. \fP"
+.ti -1c
+.RI "SDL_Surface * \fBsgGetCursorSurface\fP (\fBsgCursor\fP *cursor, \fBsgCursorType\fP type)"
+.br
+.RI "\fIReturns pointer to current cursor surface. \fP"
+.ti -1c
+.RI "\fBsgCursorTheme\fP * \fBsgNewCursorTheme\fP (void)"
+.br
+.RI "\fIallocates space for a new cursor set and links it to the list \fP"
+.ti -1c
+.RI "void \fBsgDeleteCursorTheme\fP (\fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fIfrees and unlinks a cursor theme \fP"
+.ti -1c
+.RI "void \fBsgDeleteCursorThemes\fP (void)"
+.br
+.RI "\fIfrees and unlinks all cursor themes \fP"
+.ti -1c
+.RI "void \fBsgFreeCursorTheme\fP (\fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fIfrees and unlinks a cursor set \fP"
+.ti -1c
+.RI "int \fBsgParseCursorTheme\fP (\fBsgCursorTheme\fP *theme, char *line)"
+.br
+.RI "\fIparses a line of a cursor set and returns a non-zero value if successful \fP"
+.ti -1c
+.RI "\fBsgCursorTheme\fP * \fBsgGetCursorTheme\fP (\fBsgCursor\fP *cursor)"
+.br
+.RI "\fIGets the current cursor theme. \fP"
+.ti -1c
+.RI "\fBsgList\fP * \fBsgGetCursorThemes\fP (void)"
+.br
+.RI "\fIGets the cursor theme list. \fP"
+.ti -1c
+.RI "void \fBsgSetCursorTheme\fP (\fBsgCursor\fP *cursor, \fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fISets the current cursor theme (without loading it and unloading previous one). \fP"
+.ti -1c
+.RI "\fBsgCursorTheme\fP * \fBsgFindCursorTheme\fP (const char *name)"
+.br
+.RI "\fIFinds cursor theme by its name. \fP"
+.ti -1c
+.RI "void \fBsgChangeCursorTheme\fP (\fBsgCursor\fP *cursor, \fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fIChanges cursor theme. \fP"
+.ti -1c
+.RI "\fBsgCursorTheme\fP * \fBsgOpenCursorThemeFp\fP (FILE *fp, int autoclose)"
+.br
+.RI "\fIloads a cursor set file and parses it \fP"
+.ti -1c
+.RI "\fBsgCursorTheme\fP * \fBsgOpenCursorTheme\fP (const char *file)"
+.br
+.RI "\fIopens a cursor set file and loads it \fP"
+.ti -1c
+.RI "int \fBsgOpenCursorThemes\fP (void)"
+.br
+.RI "\fILoads all available cursor sets. \fP"
+.ti -1c
+.RI "int \fBsgLoadCursorTheme\fP (\fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fIMakes a cursor theme ready to use. \fP"
+.ti -1c
+.RI "void \fBsgUnloadCursorTheme\fP (\fBsgCursorTheme\fP *theme)"
+.br
+.RI "\fIUnloads a cursor theme. \fP"
+.ti -1c
+.RI "int \fBsgSetCursorFace\fP (\fBsgCursor\fP *cursor, \fBsgCursorType\fP type)"
+.br
+.RI "\fIsets the cursor face \fP"
+.ti -1c
+.RI "int \fBsgSetCursorPos\fP (\fBsgCursor\fP *cursor, Sint16 x, Sint16 y)"
+.br
+.RI "\fIsets the cursor position \fP"
+.ti -1c
+.RI "void \fBsgAllocCursorBackup\fP (\fBsgCursor\fP *cursor, SDL_PixelFormat *format)"
+.br
+.RI "\fIallocates a large enough surface for the cursor backup \fP"
+.ti -1c
+.RI "void \fBsgClearCursorBgnd\fP (\fBsgCursor\fP *cursor)"
+.br
+.RI "\fIclears the backupped cursor background so it is not restored next time when blitting the cursor \fP"
+.ti -1c
+.RI "void \fBsgRestoreCursorBgnd\fP (\fBsgCursor\fP *cursor, SDL_Surface *surface)"
+.br
+.RI "\fIrestores the backupped background before blitting the cursor \fP"
+.ti -1c
+.RI "void \fBsgBackupCursorBgnd\fP (\fBsgCursor\fP *cursor, SDL_Surface *surface)"
+.br
+.RI "\fIbacks up the background area before blitting a cursor \fP"
+.ti -1c
+.RI "int \fBsgBlitCursor\fP (\fBsgCursor\fP *cursor, SDL_Surface *surface)"
+.br
+.RI "\fIblits cursor to a surface after restoring the old background and backing up the destination area \fP"
+.ti -1c
+.RI "void \fBsgUpdateCursor\fP (\fBsgCursor\fP *cursor, SDL_Surface *surface)"
+.br
+.RI "\fIUpdates screen rectangles for the cursor. \fP"
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBsgCursorType\fP"
+.PP
+cursor type enum 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_CURSOR_DEFAULT \fP\fP
+the default mouse pointer 
+.TP
+\fB\fISG_CURSOR_MOVE \fP\fP
+shown when over a moveable widget 
+.TP
+\fB\fISG_CURSOR_RESIZE_H \fP\fP
+shown when over a resizeable vertical widget border 
+.TP
+\fB\fISG_CURSOR_RESIZE_V \fP\fP
+shown when over a resizeable horizontal widget border 
+.TP
+\fB\fISG_CURSOR_EDIT \fP\fP
+shown when over an editable widget 
+

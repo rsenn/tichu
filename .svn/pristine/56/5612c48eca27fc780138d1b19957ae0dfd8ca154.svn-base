@@ -1,0 +1,114 @@
+.TH "sgEvent: Event handling subsystem" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgEvent: Event handling subsystem \- 
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSG_PRESSED\fP   1"
+.br
+.RI "\fIThe button is beeing pressed. \fP"
+.ti -1c
+.RI "#define \fBSG_RELEASED\fP   0"
+.br
+.RI "\fIThe button has been released. \fP"
+.ti -1c
+.RI "#define \fBsgEventButton\fP(event, b, s)"
+.br
+.RI "\fIChecks SDL_Event mouse clicks. \fP"
+.ti -1c
+.RI "#define \fBsgEventKey\fP(event, k, s)"
+.br
+.RI "\fIChecks SDL_Event structure for keypresses. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBsgEvent\fP \fBsgEvent\fP"
+.br
+.RI "\fIEvent id. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBsgEvent\fP { \fBSG_EVENT_QUIT\fP =  0, \fBSG_EVENT_RESIZE\fP, \fBSG_EVENT_CLICK\fP, \fBSG_EVENT_CHANGE\fP, \fBSG_EVENT_MOTION\fP, \fBSG_GAIN_FOCUS\fP, \fBSG_LOOSE_FOCUS\fP, \fBSG_RETURN\fP, \fBSG_KEYPRESS\fP, \fBSG_SEL_CHANGE\fP, \fBSG_SEL_CLICK\fP, \fBSG_BUTTON_DOWN\fP, \fBSG_BUTTON_UP\fP, \fBSG_SCROLL\fP }"
+.br
+.RI "\fIEnumerates event types. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define sgEventButton(event, b, s)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(event->type == ((s) == SG_PRESSED ? SDL_MOUSEBUTTONDOWN : SDL_MOUSEBUTTONUP) && \
+   event->button.button == (b))
+.fi
+Checks SDL_Event mouse clicks. 
+.PP
+.SS "#define sgEventKey(event, k, s)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(event->type == ((s) == SG_PRESSED ? SDL_KEYDOWN : SDL_KEYUP) && \
+    event->key.keysym.sym == (k))
+.fi
+Checks SDL_Event structure for keypresses. 
+.PP
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBsgEvent\fP"
+.PP
+Enumerates event types. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_EVENT_QUIT \fP\fP
+dialog has been quitted 
+.TP
+\fB\fISG_EVENT_RESIZE \fP\fP
+widget has been resized 
+.TP
+\fB\fISG_EVENT_CLICK \fP\fP
+Button has been clicked. 
+.TP
+\fB\fISG_EVENT_CHANGE \fP\fP
+Adjust bar has been changed. 
+.TP
+\fB\fISG_EVENT_MOTION \fP\fP
+Motion inside image rectangle. 
+.TP
+\fB\fISG_GAIN_FOCUS \fP\fP
+A widget has gained focus. 
+.TP
+\fB\fISG_LOOSE_FOCUS \fP\fP
+A widget has lost focus. 
+.TP
+\fB\fISG_RETURN \fP\fP
+Return has been pressed in the input widget. 
+.TP
+\fB\fISG_KEYPRESS \fP\fP
+A key has been pressed. 
+.TP
+\fB\fISG_SEL_CHANGE \fP\fP
+Listbox selection has been changed. 
+.TP
+\fB\fISG_SEL_CLICK \fP\fP
+The current listbox selection has been clicked. 
+.TP
+\fB\fISG_BUTTON_DOWN \fP\fP
+A button has been released. 
+.TP
+\fB\fISG_BUTTON_UP \fP\fP
+A button has been released. 
+.TP
+\fB\fISG_SCROLL \fP\fP
+A scrollbar has been adjusted. 
+

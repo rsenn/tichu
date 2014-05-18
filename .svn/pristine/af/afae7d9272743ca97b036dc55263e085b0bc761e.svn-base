@@ -1,0 +1,8 @@
+.TH "sgUI: main module" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgUI: main module \- Initializes and shuts down the sgUI library and provides some Global stuff.  
+
+.PP
+

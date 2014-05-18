@@ -1,0 +1,33 @@
+.TH "sgPath" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgPath \- A search path entry.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <file.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBsgNode\fP \fBnode\fP"
+.br
+.RI "\fIa node linking to the sgPathList \fP"
+.ti -1c
+.RI "char \fBdir\fP [PATH_MAX]"
+.br
+.RI "\fIthe actual search path \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A search path entry. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

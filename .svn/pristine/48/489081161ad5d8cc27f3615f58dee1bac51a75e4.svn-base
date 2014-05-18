@@ -1,0 +1,1096 @@
+.TH "sgCommon: Commonly used data, functions and macros" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgCommon: Commonly used data, functions and macros \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgColor\fP"
+.br
+.RI "\fIRGBA 32-bit color structure. \fP"
+.ti -1c
+.RI "struct \fBsgHSV\fP"
+.br
+.RI "\fIHue/Saturation/Value structure. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBAMASK\fP   0xff000000"
+.br
+.RI "\fIalpha channel mask \fP"
+.ti -1c
+.RI "#define \fBASHIFT\fP   24"
+.br
+.RI "\fIalpha channel shifting \fP"
+.ti -1c
+.RI "#define \fBRMASK\fP   0x00ff0000"
+.br
+.RI "\fIred channel mask \fP"
+.ti -1c
+.RI "#define \fBRSHIFT\fP   16"
+.br
+.RI "\fIred channel shifting \fP"
+.ti -1c
+.RI "#define \fBGMASK\fP   0x0000ff00"
+.br
+.RI "\fIgreen channel mask \fP"
+.ti -1c
+.RI "#define \fBGSHIFT\fP   8"
+.br
+.RI "\fIgreen channel shifting \fP"
+.ti -1c
+.RI "#define \fBBMASK\fP   0x000000ff"
+.br
+.RI "\fIblue channel mask \fP"
+.ti -1c
+.RI "#define \fBBSHIFT\fP   0"
+.br
+.RI "\fIblue channel shifting \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_OUTER_DARK\fP   SG_COLOR_DARKER"
+.br
+.RI "\fIshadowed part of outer frames \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_INNER_DARK\fP   SG_COLOR_DARK"
+.br
+.RI "\fIshadowed part of inner frames \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_FILL_DARK\fP   SG_COLOR_DARKTONE"
+.br
+.RI "\fIshadowed part of frame filling \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_FILL\fP   SG_COLOR_NORMAL"
+.br
+.RI "\fIframe fill color \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_FILL_BRIGHT\fP   SG_COLOR_BRIGHTTONE"
+.br
+.RI "\fIlightened part of frame filling \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_INNER_BRIGHT\fP   SG_COLOR_BRIGHT"
+.br
+.RI "\fIlightened part of inner frames \fP"
+.ti -1c
+.RI "#define \fBSG_COLOR_OUTER_BRIGHT\fP   SG_COLOR_BRIGHTER"
+.br
+.RI "\fIlightened part of outer frames \fP"
+.ti -1c
+.RI "#define \fBsgGetPixel32\fP(sf, x, y)"
+.br
+.RI "\fImacro to access a pixel on a 32-bit Surface \fP"
+.ti -1c
+.RI "#define \fBsgGetPixel8\fP(sf, x, y)"
+.br
+.RI "\fImacro to access a pixel on a 8-bit Surface \fP"
+.ti -1c
+.RI "#define \fBsgPutPixel32\fP(sf, x, y, c)"
+.br
+.RI "\fImacro to write a pixel to a 32-bit Surface \fP"
+.ti -1c
+.RI "#define \fBsgPutPixel8\fP(sf, x, y, c)"
+.br
+.RI "\fImacro to write a pixel to a 8-bit Surface \fP"
+.ti -1c
+.RI "#define \fBsgGetPixelChannel\fP(x, m, s)   (Uint8)(((x) & (m)) >> (s))"
+.br
+.RI "\fIgets value of a specific color channel from pixel data \fP"
+.ti -1c
+.RI "#define \fBsgSetPixelChannel\fP(x, m, s)   (Uint32)(((x) << (s)) & (m))"
+.br
+.RI "\fIsets value of a specific color channel \fP"
+.ti -1c
+.RI "#define \fBsgStringCopy\fP(d, s)"
+.br
+.RI "\fIA wrapper around strncpy() so the string will always be null-terminated and the destination buffers size is 'auto-detected' respectively preprocessor- evaluated. \fP"
+.ti -1c
+.RI "#define \fBsgStringCat\fP(d, s)"
+.br
+.RI "\fIA wrapper around strncat() so the string will always be null-terminated and the destination buffers size is 'auto-detected' respectively preprocessor- evaluated. \fP"
+.ti -1c
+.RI "#define \fBsgClamp\fP(v)   (Uint8)((v) > 255 ? 255 : (v))"
+.br
+.RI "\fIclamps a value to 0. \fP"
+.ti -1c
+.RI "#define \fBsgLimit\fP(value, range)"
+.br
+.RI "\fILimits «value» to 0 - «range». \fP"
+.ti -1c
+.RI "#define \fBsgSubBorder\fP(rect, border)"
+.br
+.RI "\fISubtracts a border of thickness «border» from the rectangle (Makes rectangle smaller). \fP"
+.ti -1c
+.RI "#define \fBsgAddBorder\fP(rect, border)"
+.br
+.RI "\fIAdds a border of thickness «border» to the rectangle (Makes rectangle bigger). \fP"
+.ti -1c
+.RI "#define \fBsgSplitLeft\fP(rect, newrect, pixels)"
+.br
+.RI "\fISplits a rectangle into 2 rectangles, splits «rect» vertically and creates «newrect» on the left side which is having a width of «pixels». \fP"
+.ti -1c
+.RI "#define \fBsgSplitRight\fP(rect, newrect, pixels)"
+.br
+.RI "\fISplits a rectangle into 2 rectangles, splits «rect» vertically and creates «newrect» on the right side which is having a width of «pixels». \fP"
+.ti -1c
+.RI "#define \fBsgSplitTop\fP(rect, newrect, pixels)"
+.br
+.RI "\fISplits a rectangle into 2 rectangles, splits «rect» horizontally and creates «newrect» on the top which is having a height of «pixels». \fP"
+.ti -1c
+.RI "#define \fBsgSplitBottom\fP(rect, newrect, pixels)"
+.br
+.RI "\fISplits a rectangle into 2 rectangles, splits «rect» horizontally and creates «newrect» on the bottom side which is having a height of «pixels». \fP"
+.ti -1c
+.RI "#define \fBsgSplitRect\fP(rect, newrect, where, pixels)"
+.br
+.RI "\fIAn universal split wrapper. \fP"
+.ti -1c
+.RI "#define \fBsgPadRect\fP(rect, where, pixels)"
+.br
+.RI "\fIAdds padding to a rectangle «where» can be SG_EDGE_LEFT | SG_EDGE_RIGHT | SG_EDGE_TOP | SG_EDGE_BOTTOM. \fP"
+.ti -1c
+.RI "#define \fBsgAlignPos\fP(rect, x, y, align)"
+.br
+.RI "\fIAligns the rectangle to the x and y position according to flags set in «align». \fP"
+.ti -1c
+.RI "#define \fBsgAlignRect\fP(outside, inside, align)"
+.br
+.RI "\fIAligns the «inside» rectangle within the «outside» rectangle according to flags set in «align». \fP"
+.ti -1c
+.RI "#define \fBsgBlurChannel\fP(c, v, d, m, s)   sgSetPixelChannel(sgClamp(sgGetPixelChannel(c, m, s) + (((d - sgGetPixelChannel(c, m, s)) * v) / 255)), m, s)"
+.br
+.RI "\fIBlurs a specific color channel. \fP"
+.ti -1c
+.RI "#define \fBsgBlurPixel\fP(c, v)"
+.br
+.RI "\fIBlurs a whole pixel. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBsgKey\fP \fBsgKey\fP"
+.br
+.RI "\fIType for commonly used keys. \fP"
+.ti -1c
+.RI "typedef enum \fBsgEdge\fP \fBsgEdge\fP"
+.br
+.RI "\fIType for edge enumeration. \fP"
+.ti -1c
+.RI "typedef enum \fBsgAlign\fP \fBsgAlign\fP"
+.br
+.RI "\fIType for alignment enumeration. \fP"
+.ti -1c
+.RI "typedef enum \fBsgLuminance\fP \fBsgLuminance\fP"
+.br
+.RI "\fIType for luminance. \fP"
+.ti -1c
+.RI "typedef \fBsgColor\fP \fBsgColor\fP"
+.br
+.RI "\fIRGBA 32-bit color type. \fP"
+.ti -1c
+.RI "typedef \fBsgHSV\fP \fBsgHSV\fP"
+.br
+.RI "\fIHue/Saturation/Value type. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBsgKey\fP { \fBSG_KEY_UP\fP =  0, \fBSG_KEY_DOWN\fP, \fBSG_KEY_LEFT\fP, \fBSG_KEY_RIGHT\fP, \fBSG_KEY_ENTER\fP }"
+.br
+.RI "\fIConstants for commonly used keys. \fP"
+.ti -1c
+.RI "enum \fBsgDraw\fP { \fBSG_DRAW_NORMAL\fP =  0x00, \fBSG_DRAW_INVERSE\fP =  0x01, \fBSG_DRAW_HIGH\fP =  0x02, \fBSG_DRAW_INNER\fP =  0x08, \fBSG_DRAW_SOFT\fP =  0x10, \fBSG_DRAW_CLEAR\fP =  0x20, \fBSG_DRAW_FILL\fP =  0x40, \fBSG_DRAW_INVFILL\fP =  0x80 }"
+.br
+.RI "\fIFlags for low-level drawing functions. \fP"
+.ti -1c
+.RI "enum \fBsgEdge\fP { \fBSG_EDGE_BOTTOM\fP =  0x01, \fBSG_EDGE_TOP\fP =  0x02, \fBSG_EDGE_RIGHT\fP =  0x04, \fBSG_EDGE_LEFT\fP =  0x08, \fBSG_EDGE_ALL\fP =  0x0f }"
+.br
+.RI "\fIvalues of the «edge» argument of several padding & splitting functions \fP"
+.ti -1c
+.RI "enum \fBsgAlign\fP { \fBSG_ALIGN_CENTER\fP =  0x00, \fBSG_ALIGN_LEFT\fP =  0x01, \fBSG_ALIGN_RIGHT\fP =  0x02, \fBSG_ALIGN_HORIZONTAL\fP =  0x03, \fBSG_ALIGN_MIDDLE\fP =  0x00, \fBSG_ALIGN_TOP\fP =  0x10, \fBSG_ALIGN_BOTTOM\fP =  0x20, \fBSG_ALIGN_VERTICAL\fP =  0x30 }"
+.br
+.RI "\fIvalues of the «align» argument of several rectangle and font functions \fP"
+.ti -1c
+.RI "enum \fBsgLuminance\fP { \fBSG_COLOR_BLACK\fP =  0, \fBSG_COLOR_DARKER\fP =  56, \fBSG_COLOR_DARK\fP =  85, \fBSG_COLOR_DARKTONE\fP =  113, \fBSG_COLOR_NORMAL\fP =  141, \fBSG_COLOR_BRIGHTTONE\fP =  170, \fBSG_COLOR_BRIGHT\fP =  198, \fBSG_COLOR_BRIGHTER\fP =  226, \fBSG_COLOR_WHITE\fP =  255 }"
+.br
+.RI "\fICommonly used luminance values (palette indexes). \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsgLog\fP (const char *msg,...)"
+.br
+.RI "\fIWrites a log entry. \fP"
+.ti -1c
+.RI "void \fBsgDumpRect\fP (SDL_Rect *rect)"
+.br
+.RI "\fIDumps rectangle dimensions to the log. \fP"
+.ti -1c
+.RI "void \fBsgDumpColor\fP (SDL_Color *color)"
+.br
+.RI "\fIDumps color values to the log. \fP"
+.ti -1c
+.RI "void \fBsgFade\fP (SDL_Surface *screen, SDL_Surface *from, SDL_Surface *to, Uint32 duration)"
+.br
+.RI "\fIFades from one surface to another in a specified time. \fP"
+.ti -1c
+.RI "void \fBsgCopy\fP (SDL_Surface *src, SDL_Rect *sr, SDL_Surface *dst, SDL_Rect *dr)"
+.br
+.RI "\fICopies from one RGBA surface to another. \fP"
+.ti -1c
+.RI "void \fBsgCopyPalette\fP (SDL_Surface *src, SDL_Rect *sr, SDL_Surface *dst, SDL_Rect *dr)"
+.br
+.RI "\fICopies an 8-bit paletted surface to a 32-bit RGBA one by using the per-surface-alpha of the source surface. \fP"
+.ti -1c
+.RI "void \fBsgBlur\fP (SDL_Surface *src, SDL_Rect *sr, SDL_Surface *dst, SDL_Rect *dr, \fBsgColor\fP tint)"
+.br
+.RI "\fIBlits from one surface to another by using a feathered brush and applying color tinting. \fP"
+.ti -1c
+.RI "void \fBsgAlphaBlit\fP (SDL_Surface *src, SDL_Rect *sr, SDL_Surface *dst, SDL_Rect *dr)"
+.br
+.RI "\fIAdditive alpha blit (Currently not used by any widget). \fP"
+.ti -1c
+.RI "void \fBsgDrawRect\fP (SDL_Surface *dest, SDL_Rect *rect, Uint8 ia, Uint8 ib, \fBsgDraw\fP draw)"
+.br
+.RI "\fIDraws a gradient rectangle with fixed starting and ending colors to an 8-bit Surface. \fP"
+.ti -1c
+.RI "void \fBsgDrawGradient\fP (SDL_Surface *dest, SDL_Rect *rect, \fBsgDraw\fP draw)"
+.br
+.RI "\fIDraws a gradient rectangle to an 8-bit Surface according to the drawing flags. \fP"
+.ti -1c
+.RI "void \fBsgDrawSingleFrame\fP (SDL_Surface *dest, SDL_Rect *rect, \fBsgDraw\fP draw)"
+.br
+.RI "\fIDraws a paletted frame to an 8-bit Surface. \fP"
+.ti -1c
+.RI "void \fBsgDrawFrame\fP (SDL_Surface *dest, SDL_Rect *rect, \fBsgDraw\fP draw)"
+.br
+.RI "\fIDraws a paletted 2-pixel-wide frame to an 8-bit Surface. \fP"
+.ti -1c
+.RI "void \fBsgDrawHLine\fP (SDL_Surface *dest, Sint16 x1, Sint16 x2, Sint16 y, Uint8 i1, Uint8 i2)"
+.br
+.RI "\fIDraws a horizontal line to an 8-bit Surface. \fP"
+.ti -1c
+.RI "void \fBsgBlendHLine\fP (SDL_Surface *dest, Sint16 x1, Sint16 x2, Sint16 y)"
+.br
+.RI "\fIDraws a horizontal line to an 8-bit Surface start and end colors are read from the start and end points. \fP"
+.ti -1c
+.RI "void \fBsgDrawVLine\fP (SDL_Surface *dest, Sint16 x, Sint16 y1, Sint16 y2, Uint8 i1, Uint8 i2)"
+.br
+.RI "\fIDraws a vertical line to an 8-bit Surface. \fP"
+.ti -1c
+.RI "void \fBsgBlendVLine\fP (SDL_Surface *dest, Sint16 x, Sint16 y1, Sint16 y2)"
+.br
+.RI "\fIDraws a vertical line to an 8-bit Surface. \fP"
+.ti -1c
+.RI "\fBsgColor\fP \fBsgHSVToRGB\fP (\fBsgHSV\fP hsv)"
+.br
+.RI "\fIConverts a color value from HSV to RGB colorspace. \fP"
+.ti -1c
+.RI "\fBsgHSV\fP \fBsgRGBToHSV\fP (\fBsgColor\fP rgb)"
+.br
+.RI "\fIConverts a color value from RGB to HSV colorspace. \fP"
+.ti -1c
+.RI "\fBsgColor\fP * \fBsgCreatePalette\fP (\fBsgColor\fP base)"
+.br
+.RI "\fICreate a palette consisting of 256 colors matching the specified hue. \fP"
+.ti -1c
+.RI "\fBsgColor\fP * \fBsgCreateBWPalette\fP (\fBsgColor\fP base)"
+.br
+.RI "\fICreate a palette consisting of 256 colors matching the specified hue but equalize the channels to get a greyscale palette. \fP"
+.ti -1c
+.RI "int \fBsgMatchRect\fP (SDL_Rect *rect, Sint16 x, Sint16 y)"
+.br
+.RI "\fIChecks whether a specific x/y position lies within a rectangle. \fP"
+.ti -1c
+.RI "void \fBsgMergeRect\fP (SDL_Rect *rect, SDL_Rect a, SDL_Rect b)"
+.br
+.RI "\fIMerges two rectangles (A and B). \fP"
+.ti -1c
+.RI "void \fBsgIntersect\fP (SDL_Rect *a, SDL_Rect *b)"
+.br
+.RI "\fIChecks whether rectangle A and B intersect. \fP"
+.ti -1c
+.RI "void \fBsgClip\fP (SDL_Surface *surface, SDL_Rect *rect)"
+.br
+.RI "\fIClip rectangle so it will fit into the surface. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "SDL_PixelFormat \fBsgPixelFormat32\fP"
+.br
+.RI "\fIPixel format for 32-bit BGRA surfaces. \fP"
+.ti -1c
+.RI "SDL_PixelFormat \fBsgPixelFormat32\fP"
+.br
+.RI "\fIPixel format for 32-bit BGRA surfaces. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define sgGetPixel32(sf, x, y)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(((Uint32 *)(sf)->pixels) \
+                                         [(y) * ((sf)->pitch >> 2) + (x)])
+.fi
+macro to access a pixel on a 32-bit Surface 
+.PP
+.SS "#define sgGetPixel8(sf, x, y)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(((Uint8 *)(sf)->pixels) \
+                                         [(y) * (sf)->pitch + (x)])
+.fi
+macro to access a pixel on a 8-bit Surface 
+.PP
+.SS "#define sgPutPixel32(sf, x, y, c)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(((Uint32 *)(sf)->pixels) \
+                                         [(y) * ((sf)->pitch >> 2) + (x)] = c)
+.fi
+macro to write a pixel to a 32-bit Surface 
+.PP
+.SS "#define sgPutPixel8(sf, x, y, c)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+(((Uint8 *)(sf)->pixels) \
+                                         [(y) * (sf)->pitch + (x)] = c)
+.fi
+macro to write a pixel to a 8-bit Surface 
+.PP
+.SS "#define sgStringCopy(d, s)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do \
+{ \
+  if(s) { \
+    strncpy((d), (s), sizeof(d)); \
+    (d)[sizeof(d) - 1] = '\0'; \
+  } else { \
+    (d)[0] = '\0'; \
+  } \
+} while(0)
+.fi
+A wrapper around strncpy() so the string will always be null-terminated and the destination buffers size is 'auto-detected' respectively preprocessor- evaluated. 
+.PP
+.SS "#define sgStringCat(d, s)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do \
+{ \
+  if(s) { \
+    int p = strlen(d); \
+    int n = sizeof(d) - p - 1; \
+    strncat((d), (s), n); \
+    (d)[sizeof(d) - 1] = '\0'; \
+  } \
+} while(0)
+.fi
+A wrapper around strncat() so the string will always be null-terminated and the destination buffers size is 'auto-detected' respectively preprocessor- evaluated. 
+.PP
+.SS "#define sgClamp(v)   (Uint8)((v) > 255 ? 255 : (v))"
+.PP
+clamps a value to 0. 
+.PP
+.255 
+.SS "#define sgLimit(value, range)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+((value) < 0 ? 0 : \
+                              ((value) < (range) ? \
+                               (value) : (range)))
+.fi
+Limits «value» to 0 - «range». 
+.PP
+.SS "#define sgSubBorder(rect, border)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  (rect)->x += (border); \
+  (rect)->y += (border); \
+  (rect)->w -= (border) * 2; \
+  (rect)->h -= (border) * 2; \
+} while(0);
+.fi
+Subtracts a border of thickness «border» from the rectangle (Makes rectangle smaller). 
+.PP
+.SS "#define sgAddBorder(rect, border)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  (rect)->x -= (border); \
+  (rect)->y -= (border); \
+  (rect)->w += (border) * 2; \
+  (rect)->h += (border) * 2; \
+} while(0);
+.fi
+Adds a border of thickness «border» to the rectangle (Makes rectangle bigger). 
+.PP
+.SS "#define sgSplitLeft(rect, newrect, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  if((SDL_Rect *)newrect) \
+  { \
+    *((SDL_Rect *)newrect) = *(rect); \
+     ((SDL_Rect *)newrect)->w = pixels; \
+  } \
+  (rect)->w -= pixels; \
+  (rect)->x += pixels; \
+} while(0);
+.fi
+Splits a rectangle into 2 rectangles, splits «rect» vertically and creates «newrect» on the left side which is having a width of «pixels». 
+.PP
+.SS "#define sgSplitRight(rect, newrect, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  if((SDL_Rect *)newrect) \
+  { \
+    *((SDL_Rect *)newrect) = *(rect); \
+     ((SDL_Rect *)newrect)->w = (pixels); \
+     ((SDL_Rect *)newrect)->x += (rect)->w - (pixels); \
+  } \
+  (rect)->w -= pixels; \
+} while(0);
+.fi
+Splits a rectangle into 2 rectangles, splits «rect» vertically and creates «newrect» on the right side which is having a width of «pixels». 
+.PP
+.SS "#define sgSplitTop(rect, newrect, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  if((SDL_Rect *)newrect) \
+  { \
+    *((SDL_Rect *)newrect) = *(rect); \
+     ((SDL_Rect *)newrect)->h = (pixels); \
+  } \
+  (rect)->h -= (pixels); \
+  (rect)->y += (pixels); \
+} while(0);
+.fi
+Splits a rectangle into 2 rectangles, splits «rect» horizontally and creates «newrect» on the top which is having a height of «pixels». 
+.PP
+.SS "#define sgSplitBottom(rect, newrect, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  if((SDL_Rect *)newrect) \
+  { \
+    *((SDL_Rect *)newrect) = *(rect); \
+     ((SDL_Rect *)newrect)->h = (pixels); \
+     ((SDL_Rect *)newrect)->y += (rect)->h - (pixels); \
+  } \
+  (rect)->h -= (pixels); \
+} while(0);
+.fi
+Splits a rectangle into 2 rectangles, splits «rect» horizontally and creates «newrect» on the bottom side which is having a height of «pixels». 
+.PP
+.SS "#define sgSplitRect(rect, newrect, where, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  Uint16 p = (pixels); \
+  switch(where) \
+  { \
+    case SG_EDGE_LEFT: \
+      sgSplitLeft(rect, newrect, p); \
+      break; \
+    case SG_EDGE_RIGHT: \
+      sgSplitRight(rect, newrect, p); \
+      break; \
+    case SG_EDGE_TOP: \
+      sgSplitTop(rect, newrect, p); \
+      break; \
+    case SG_EDGE_BOTTOM: \
+      sgSplitBottom(rect, newrect, p); \
+      break; \
+    default: \
+      break; \
+  } \
+} while(0);
+.fi
+An universal split wrapper. 
+.PP
+«where» can be SG_EDGE_LEFT, SG_EDGE_RIGHT, SG_EDGE_TOP or SG_EDGE_BOTTOM
+.SS "#define sgPadRect(rect, where, pixels)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  if((where) & SG_EDGE_LEFT) \
+  { \
+    ((SDL_Rect *)rect)->x += (pixels); \
+    ((SDL_Rect *)rect)->w -= (pixels); \
+  } \
+  if((where) & SG_EDGE_TOP) \
+  { \
+    ((SDL_Rect *)rect)->y += (pixels); \
+    ((SDL_Rect *)rect)->h -= (pixels); \
+  } \
+  if((where) & SG_EDGE_RIGHT) \
+  { \
+    ((SDL_Rect *)rect)->w -= (pixels); \
+  } \
+  if((where) & SG_EDGE_BOTTOM) \
+  { \
+    ((SDL_Rect *)rect)->h -= (pixels); \
+  } \
+} while(0);
+.fi
+Adds padding to a rectangle «where» can be SG_EDGE_LEFT | SG_EDGE_RIGHT | SG_EDGE_TOP | SG_EDGE_BOTTOM. 
+.PP
+.SS "#define sgAlignPos(rect, x, y, align)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  switch((align) & SG_ALIGN_HORIZONTAL) \
+  { \
+    case SG_ALIGN_RIGHT: \
+      (rect)->x = (x) - (rect)->w; \
+      break; \
+    case SG_ALIGN_CENTER: \
+      (rect)->x = (x) - (rect)->w / 2; \
+      break; \
+    case SG_ALIGN_LEFT: \
+    default: \
+      (rect)->x = (x); \
+      break; \
+  } \
+  switch((align) & SG_ALIGN_VERTICAL) \
+  { \
+    case SG_ALIGN_TOP: \
+      (rect)->y = (y); \
+      break; \
+    case SG_ALIGN_BOTTOM: \
+      (rect)->y = (y) - (rect)->h; \
+      break; \
+    case SG_ALIGN_MIDDLE: \
+    default: \
+      (rect)->y = (y) - (rect)->h / 2; \
+      break; \
+  } \
+} while(0);
+.fi
+Aligns the rectangle to the x and y position according to flags set in «align». 
+.PP
+.SS "#define sgAlignRect(outside, inside, align)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  switch((align) & SG_ALIGN_HORIZONTAL) \
+  { \
+    case SG_ALIGN_RIGHT: \
+      (inside)->x = (outside)->x + (outside)->w - (inside)->w; \
+      break; \
+    case SG_ALIGN_CENTER: \
+      (inside)->x = (outside)->x + ((outside)->w - (inside)->w) / 2; \
+      break; \
+    case SG_ALIGN_LEFT: \
+    default: \
+      (inside)->x = (outside)->x; \
+      break; \
+  } \
+  switch((align) & SG_ALIGN_VERTICAL) \
+  { \
+    case SG_ALIGN_TOP: \
+      (inside)->y = (outside)->y; \
+      break; \
+    case SG_ALIGN_BOTTOM: \
+      (inside)->y = (outside)->y + (outside)->h - (inside)->h; \
+      break; \
+    case SG_ALIGN_MIDDLE: \
+    default: \
+      (inside)->y = (outside)->y + ((outside)->h - (inside)->h) / 2; \
+      break; \
+  } \
+} while(0);
+.fi
+Aligns the «inside» rectangle within the «outside» rectangle according to flags set in «align». 
+.PP
+.SS "#define sgBlurPixel(c, v)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+cp = &(c); \
+  if(cp >= start && cp < end) \
+    { *cp = sgBlurChannel(*cp, v, tint.r, RMASK, RSHIFT) | \
+            sgBlurChannel(*cp, v, tint.g, GMASK, GSHIFT) | \
+            sgBlurChannel(*cp, v, tint.b, BMASK, BSHIFT) | \
+            sgBlurChannel(*cp, v, tint.a, AMASK, ASHIFT); }
+.fi
+Blurs a whole pixel. 
+.PP
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBsgDraw\fP"
+.PP
+Flags for low-level drawing functions. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_DRAW_NORMAL \fP\fP
+normal gradients (will draw raised frames and fillings) 
+.TP
+\fB\fISG_DRAW_INVERSE \fP\fP
+inverse gradients (will draw sunken frames and fillings) 
+.TP
+\fB\fISG_DRAW_HIGH \fP\fP
+increased contrast (for outer frames) 
+.TP
+\fB\fISG_DRAW_CLEAR \fP\fP
+clear instead of fill (fill with zero) 
+.TP
+\fB\fISG_DRAW_FILL \fP\fP
+draw filled frames 
+.TP
+\fB\fISG_DRAW_INVFILL \fP\fP
+inverse fill 
+.SS "enum \fBsgEdge\fP"
+.PP
+values of the «edge» argument of several padding & splitting functions 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_EDGE_BOTTOM \fP\fP
+splits/pads rectangle at bottom 
+.TP
+\fB\fISG_EDGE_TOP \fP\fP
+splits/pads rectangle at top 
+.TP
+\fB\fISG_EDGE_RIGHT \fP\fP
+splits/pads rectangle at right 
+.TP
+\fB\fISG_EDGE_LEFT \fP\fP
+splits/pads rectangle at left 
+.TP
+\fB\fISG_EDGE_ALL \fP\fP
+all edges 
+.SS "enum \fBsgAlign\fP"
+.PP
+values of the «align» argument of several rectangle and font functions 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_ALIGN_CENTER \fP\fP
+centered 
+.TP
+\fB\fISG_ALIGN_LEFT \fP\fP
+left aligned 
+.TP
+\fB\fISG_ALIGN_RIGHT \fP\fP
+right aligned 
+.TP
+\fB\fISG_ALIGN_HORIZONTAL \fP\fP
+mask for horizontal alignment 
+.TP
+\fB\fISG_ALIGN_MIDDLE \fP\fP
+vertically centered 
+.TP
+\fB\fISG_ALIGN_TOP \fP\fP
+top aligned 
+.TP
+\fB\fISG_ALIGN_BOTTOM \fP\fP
+bottom aligned 
+.TP
+\fB\fISG_ALIGN_VERTICAL \fP\fP
+mask for vertical alignment 
+.SS "enum \fBsgLuminance\fP"
+.PP
+Commonly used luminance values (palette indexes). 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_COLOR_BLACK \fP\fP
+darkest color 
+.TP
+\fB\fISG_COLOR_DARKER \fP\fP
+darker color 
+.TP
+\fB\fISG_COLOR_DARK \fP\fP
+dark color 
+.TP
+\fB\fISG_COLOR_DARKTONE \fP\fP
+somewhat darker 
+.TP
+\fB\fISG_COLOR_NORMAL \fP\fP
+the color tone with full saturation 
+.TP
+\fB\fISG_COLOR_BRIGHTTONE \fP\fP
+somewhat brighter 
+.TP
+\fB\fISG_COLOR_BRIGHT \fP\fP
+bright color 
+.TP
+\fB\fISG_COLOR_BRIGHTER \fP\fP
+brighter color 
+.TP
+\fB\fISG_COLOR_WHITE \fP\fP
+brightest color 
+.SH "Function Documentation"
+.PP 
+.SS "void sgLog (const char * msg,  ...)"
+.PP
+Writes a log entry. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImsg\fP Message to write to the log
+.RE
+.PP
+
+.SS "void sgDumpRect (SDL_Rect * rect)"
+.PP
+Dumps rectangle dimensions to the log. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrect\fP The rectangle to dump out
+.RE
+.PP
+
+.SS "void sgDumpColor (SDL_Color * color)"
+.PP
+Dumps color values to the log. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcolor\fP The color to dump out
+.RE
+.PP
+
+.SS "void sgFade (SDL_Surface * screen, SDL_Surface * from, SDL_Surface * to, Uint32 duration)"
+.PP
+Fades from one surface to another in a specified time. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIscreen\fP The screen surface 
+.br
+\fIfrom\fP Original surface 
+.br
+\fIto\fP Resulting surface 
+.br
+\fIduration\fP Time in milliseconds
+.RE
+.PP
+
+.SS "void sgCopy (SDL_Surface * src, SDL_Rect * sr, SDL_Surface * dst, SDL_Rect * dr)"
+.PP
+Copies from one RGBA surface to another. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc\fP Source surface 
+.br
+\fIsr\fP Source clipping rectangle 
+.br
+\fIdst\fP Destination surface 
+.br
+\fIdr\fP Destination clipping rectangle
+.RE
+.PP
+
+.SS "void sgCopyPalette (SDL_Surface * src, SDL_Rect * sr, SDL_Surface * dst, SDL_Rect * dr)"
+.PP
+Copies an 8-bit paletted surface to a 32-bit RGBA one by using the per-surface-alpha of the source surface. 
+.PP
+(Currently not used by any widget)
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc\fP Source surface 
+.br
+\fIsr\fP Source clipping rectangle 
+.br
+\fIdst\fP Destination surface 
+.br
+\fIdr\fP Destination clipping rectangle
+.RE
+.PP
+
+.SS "void sgBlur (SDL_Surface * src, SDL_Rect * sr, SDL_Surface * dst, SDL_Rect * dr, \fBsgColor\fP tint)"
+.PP
+Blits from one surface to another by using a feathered brush and applying color tinting. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc\fP Source surface 
+.br
+\fIsr\fP Source clipping rectangle 
+.br
+\fIdst\fP Destination surface 
+.br
+\fIdr\fP Destination rectangle 
+.br
+\fItint\fP Color tinting value (also influences the alpha channel)
+.RE
+.PP
+
+.SS "void sgAlphaBlit (SDL_Surface * src, SDL_Rect * sr, SDL_Surface * dst, SDL_Rect * dr)"
+.PP
+Additive alpha blit (Currently not used by any widget). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc\fP Source surface 
+.br
+\fIsr\fP Source clipping rectangle 
+.br
+\fIdst\fP Destination surface 
+.br
+\fIdr\fP Destination rectangle
+.RE
+.PP
+
+.SS "void sgDrawSingleFrame (SDL_Surface * dest, SDL_Rect * rect, \fBsgDraw\fP draw)"
+.PP
+Draws a paletted frame to an 8-bit Surface. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP Destination surface (8-bit logically paletted) 
+.br
+\fIrect\fP Frame dimensions 
+.br
+\fIdraw\fP Flags which determine frame appearance, see \fBsgDraw\fP
+.RE
+.PP
+
+.SS "void sgDrawFrame (SDL_Surface * dest, SDL_Rect * rect, \fBsgDraw\fP draw)"
+.PP
+Draws a paletted 2-pixel-wide frame to an 8-bit Surface. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP Destination surface (8-bit logically paletted) 
+.br
+\fIrect\fP Frame dimensions 
+.br
+\fIdraw\fP Flags which determine frame appearance, see \fBsgDraw\fP
+.RE
+.PP
+
+.SS "void sgDrawHLine (SDL_Surface * dest, Sint16 x1, Sint16 x2, Sint16 y, Uint8 i1, Uint8 i2)"
+.PP
+Draws a horizontal line to an 8-bit Surface. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP destination surface (8-bit logically paletted) 
+.br
+\fIx1\fP starting position 
+.br
+\fIx2\fP ending position 
+.br
+\fIy\fP position on y-axis 
+.br
+\fIi1\fP starting color 
+.br
+\fIi2\fP ending color
+.RE
+.PP
+
+.SS "void sgBlendHLine (SDL_Surface * dest, Sint16 x1, Sint16 x2, Sint16 y)"
+.PP
+Draws a horizontal line to an 8-bit Surface start and end colors are read from the start and end points. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP destination surface (8-bit logically paletted) 
+.br
+\fIx1\fP starting position 
+.br
+\fIx2\fP ending position 
+.br
+\fIy\fP position on y-axis
+.RE
+.PP
+
+.SS "void sgDrawVLine (SDL_Surface * dest, Sint16 x, Sint16 y1, Sint16 y2, Uint8 i1, Uint8 i2)"
+.PP
+Draws a vertical line to an 8-bit Surface. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP destination surface (8-bit logically paletted) 
+.br
+\fIx\fP position on the x-axis 
+.br
+\fIy1\fP starting position 
+.br
+\fIy2\fP ending position 
+.br
+\fIi1\fP starting color 
+.br
+\fIi2\fP ending color
+.RE
+.PP
+
+.SS "void sgBlendVLine (SDL_Surface * dest, Sint16 x, Sint16 y1, Sint16 y2)"
+.PP
+Draws a vertical line to an 8-bit Surface. 
+.PP
+Start and end colors are read from the start and end points.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdest\fP destination surface (8-bit logically paletted) 
+.br
+\fIx\fP position on the x-axis 
+.br
+\fIy1\fP starting position 
+.br
+\fIy2\fP ending position
+.RE
+.PP
+
+.SS "\fBsgColor\fP * sgCreatePalette (\fBsgColor\fP base)"
+.PP
+Create a palette consisting of 256 colors matching the specified hue. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbase\fP hue value in the HSV model on which the palette will base.
+.RE
+.PP
+
+.SS "\fBsgColor\fP * sgCreateBWPalette (\fBsgColor\fP base)"
+.PP
+Create a palette consisting of 256 colors matching the specified hue but equalize the channels to get a greyscale palette. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbase\fP hue value in the HSV model on which the palette will base.
+.RE
+.PP
+
+.SS "int sgMatchRect (SDL_Rect * rect, Sint16 x, Sint16 y)"
+.PP
+Checks whether a specific x/y position lies within a rectangle. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrect\fP The rectangle to match 
+.br
+\fIx\fP The tested value on the X-axis 
+.br
+\fIy\fP The tested value on the Y-axis
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 when x and y are inside rect, 0 otherwise
+.RE
+.PP
+
+.SS "void sgMergeRect (SDL_Rect * rect, SDL_Rect a, SDL_Rect b)"
+.PP
+Merges two rectangles (A and B). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrect\fP Destination rectangle 
+.br
+\fIa\fP Rectangle A 
+.br
+\fIb\fP Rectangle B
+.RE
+.PP
+
+.SS "void sgIntersect (SDL_Rect * a, SDL_Rect * b)"
+.PP
+Checks whether rectangle A and B intersect. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP Some rectangle 
+.br
+\fIb\fP Another rectangle
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 when rectangle A and B intersect, 0 otherwise
+.RE
+.PP
+
+.SS "void sgClip (SDL_Surface * surface, SDL_Rect * rect)"
+.PP
+Clip rectangle so it will fit into the surface. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsurface\fP The rectangle will be clipped to the dimensions of this surface 
+.br
+\fIrect\fP Rectangle to be clipped
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "SDL_PixelFormat \fBsgPixelFormat32\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .palette = NULL,
+  .BitsPerPixel = 32,
+  .BytesPerPixel = 4,
+  .Rloss = 0, .Gloss = 0, .Bloss = 0, .Aloss = 0,
+  .Rshift = RSHIFT, .Gshift = GSHIFT, .Bshift = BSHIFT, .Ashift = ASHIFT,
+  .Rmask  = RMASK,  .Gmask  = GMASK,  .Bmask  = BMASK,  .Amask  = AMASK,
+  .colorkey = 0,
+  .alpha = 0xff,
+}
+.fi
+Pixel format for 32-bit BGRA surfaces. 
+.PP
+

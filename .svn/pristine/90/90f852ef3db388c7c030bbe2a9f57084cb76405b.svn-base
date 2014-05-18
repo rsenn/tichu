@@ -1,0 +1,41 @@
+.TH "sgCursorTheme" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgCursorTheme \- a set of cursors  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cursor.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBsgNode\fP \fBnode\fP"
+.br
+.RI "\fINode which links to cursor set list. \fP"
+.ti -1c
+.RI "char \fBname\fP [64]"
+.br
+.RI "\fIFull name of the cursor set. \fP"
+.ti -1c
+.RI "char \fBimage\fP [64]"
+.br
+.RI "\fIImage file. \fP"
+.ti -1c
+.RI "\fBsgCursorFace\fP \fBfaces\fP [SG_CURSOR_COUNT]"
+.br
+.RI "\fIAll the faces of the set. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+a set of cursors 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

@@ -1,0 +1,114 @@
+.TH "sgTab: Tabbing compound widget" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgTab: Tabbing compound widget \- Tabbing compounds can contain several groups.  
+
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgTab\fP"
+.br
+.RI "\fIDefines a specialised structure for a tab widget. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgTab\fP(w)   (w)->data.tab"
+.br
+.RI "\fIA macro to access the specialised structure of a tab widget. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgTab\fP \fBsgTab\fP"
+.br
+.RI "\fIData type for widget-specific storage. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewTabFull\fP (\fBsgWidget\fP *parent)"
+.br
+.RI "\fICreates a new tab widget using full dialog size. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewTabRect\fP (\fBsgWidget\fP *parent, SDL_Rect rect)"
+.br
+.RI "\fICreates a new tab widget from a rectangle. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewTab\fP (\fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h)"
+.br
+.RI "\fICreates a new tab widget. \fP"
+.ti -1c
+.RI "void \fBsgRecalcTab\fP (\fBsgWidget\fP *tab)"
+.br
+.RI "\fIRecalc tab dimensions. \fP"
+.ti -1c
+.RI "void \fBsgRedrawTab\fP (\fBsgWidget\fP *tab)"
+.br
+.RI "\fIDraws tab look. \fP"
+.ti -1c
+.RI "int \fBsgHandleTabEvent\fP (\fBsgWidget\fP *group, \fBsgEvent\fP event)"
+.br
+.RI "\fIHandles events for a group inside a tab widget. \fP"
+.ti -1c
+.RI "void \fBsgAddTab\fP (\fBsgWidget\fP *tab, \fBsgWidget\fP *add, \fBsgEdge\fP edge, \fBsgAlign\fP align)"
+.br
+.RI "\fIAdds a widget to a tab. \fP"
+.ti -1c
+.RI "void \fBsgAddTabGroup\fP (\fBsgWidget\fP *tab, \fBsgWidget\fP *group)"
+.br
+.RI "\fIAdds a group widget to the tab-control. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgSelectedTabGroup\fP (\fBsgWidget\fP *tab)"
+.br
+.RI "\fIReturns the currently active tab group. \fP"
+.ti -1c
+.RI "void \fBsgSelectTabGroup\fP (\fBsgWidget\fP *tab, \fBsgWidget\fP *group)"
+.br
+.RI "\fISets the currently active tab group. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgTabType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the tabing widget. \fP"
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgTabType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the tabing widget. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Tabbing compounds can contain several groups. 
+.PP
+.SH "Variable Documentation"
+.PP 
+.SS "\fBsgWidgetType\fP \fBsgTabType\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .name = 'sgTab',
+  .size = sizeof(struct sgTab),
+  .methods =
+  {
+    .recalc = sgRecalcTab,
+    .redraw = sgRedrawTab,
+    .handler = NULL,
+    .blit = sgBlitWidget
+  }
+}
+.fi
+Configuration and initial methods of the tabing widget. 
+.PP
+

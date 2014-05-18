@@ -1,0 +1,21 @@
++-----------------------------------+
+| Todo-List für Tichu server/client |
++-----------------------------------+
+
+- drachenstich verschenken in player.c
+  (schön wäre so wie beim schupfen, anzeigen der 3 anderen spieler per kreis,
+   die kreise als buttons zum anklicken)
+- mahjongg -> wünschen
+
+
+prioritäten:
+----------------------
+- verteilung der karten auf dem stack, 
+auch wenn mehr als 10 karten auf einmal gespielt werden, muss jede einzelne auf 
+dem stack erkennbar sein!!!!!!!
+- Stack verschwindet manchmal, darf nicht sein.
+- der Stack darf nur in eine Richtung, und zwar gegenuhrzeigersinn, rotieren
+- bug-> karten bleiben oben links "hängen"
+- vom server abgeweisene karten müssen auch auf dem floating layer wieder vom 
+stack genommen werden
+ 

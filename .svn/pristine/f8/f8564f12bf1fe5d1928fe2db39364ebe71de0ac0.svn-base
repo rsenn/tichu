@@ -1,0 +1,47 @@
+.TH "sgWidgetMethods" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgWidgetMethods \- The methods of a widget.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <widget.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetCallback\fP * \fBdelete\fP"
+.br
+.RI "\fIcleans the widget \fP"
+.ti -1c
+.RI "\fBsgWidgetCallback\fP * \fBrecalc\fP"
+.br
+.RI "\fIcalcs widget dimension \fP"
+.ti -1c
+.RI "\fBsgWidgetCallback\fP * \fBredraw\fP"
+.br
+.RI "\fIdraws widget look \fP"
+.ti -1c
+.RI "\fBsgWidgetHandler\fP * \fBhandler\fP"
+.br
+.RI "\fIprocesses SDL events \fP"
+.ti -1c
+.RI "\fBsgWidgetBlit\fP * \fBblit\fP"
+.br
+.RI "\fIblits widget to a surface \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The methods of a widget. 
+
+The methods of a widget are called whenever a redraw/recalc/deletion of the widget is requested, or when there are incoming SDL events
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

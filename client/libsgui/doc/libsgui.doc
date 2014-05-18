@@ -1,0 +1,23 @@
+/*! @mainpage          Documentation for the sgUI library
+
+    @section abstract  Abstract
+
+                       The sgUI library is a lightweight GUI library for use
+                       with SDL.
+                       It needs, except for the fonts, no external data files
+                       to render widget graphics. They are all software-rendered.
+
+    @section areas     Areas of intrest
+
+    @arg @ref          changelog
+
+    @arg               Screenshots are included in the <A HREF="examples.html">examples</A>
+                       section and the libsgui interface documentation
+
+    @section changelog ChangeLog
+    \include ChangeLog
+
+    @section gnu_lgpl GNU LIBRARY GENERAL PUBLIC LICENSE
+    @include COPYING.LIB
+ */
+

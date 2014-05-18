@@ -1,0 +1,20 @@
+/*! @example example01.c
+
+    <h1>Example 1</h1>
+    
+    This example shows the basic look of an sgUI Dialog and demonstrates
+    the moving of a widget using an adjust bar.
+    
+    <hr>
+    
+    <center>
+    @image html example01.png
+    </center>
+    
+    <hr>
+    The source code:
+    @include example01.c
+    <hr>
+
+ */
+

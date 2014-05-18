@@ -1,0 +1,49 @@
+.TH "sgPicts: Pictograms" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgPicts: Pictograms \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgPict\fP"
+.br
+.RI "\fIPictogram info and data. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsgPutPict\fP (SDL_Surface *surface, SDL_Rect *drect, \fBsgPict\fP *pict, \fBsgDraw\fP draw)"
+.br
+.RI "\fIApplies pictogram data to a surface (some kind of bump-mapping). \fP"
+.ti -1c
+.RI "void \fBsgCopyPict\fP (SDL_Surface *surface, SDL_Rect *drect, \fBsgPict\fP *pict, \fBsgDraw\fP draw)"
+.br
+.RI "\fICopies pictogram data to a surface. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgPict\fP \fBsgArrowUp\fP"
+.br
+.RI "\fIA pictogram arrow pointing upwards. \fP"
+.ti -1c
+.RI "\fBsgPict\fP \fBsgArrowDown\fP"
+.br
+.RI "\fIarrow pointing downwards \fP"
+.ti -1c
+.RI "\fBsgPict\fP \fBsgArrowDrop\fP"
+.br
+.RI "\fIarrow for undeployed dropdown \fP"
+.ti -1c
+.RI "\fBsgPict\fP \fBsgArrowUndrop\fP"
+.br
+.RI "\fIarrow for deployed dropdown \fP"
+.ti -1c
+.RI "\fBsgPict\fP \fBsgCircle\fP"
+.br
+.RI "\fIa 16x16 circle \fP"
+.in -1c

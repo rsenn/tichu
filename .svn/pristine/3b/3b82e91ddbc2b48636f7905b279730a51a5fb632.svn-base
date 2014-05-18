@@ -1,0 +1,77 @@
+# $Id: configure.in,v 1.30 2005/05/10 00:29:16 smoli Exp $
+# ===========================================================================
+#
+# GNU autoconf template for tichu-server
+#
+# initialize autoconf (require version 2.5x)
+# ---------------------------------------------------------------------------
+AC_PREREQ(2.50)
+AC_INIT([tichu-server],[0.10])
+
+# check for compiling modes
+# ---------------------------------------------------------------------------
+AC_CHECK_COLOR
+
+# set some info stuff
+# ---------------------------------------------------------------------------
+AC_SET_ARGS
+
+PACKAGE_RELEASE="peace & love - hippie edition"
+AC_DEFINE_UNQUOTED(PACKAGE_RELEASE, "$PACKAGE_RELEASE", [Define to the release name of this package.])
+
+CREATION=$(date)
+PLATFORM=$(uname -a)
+AC_DEFINE_UNQUOTED(CREATION, "$CREATION", [Creation time of this server])
+AC_DEFINE_UNQUOTED(PLATFORM, "$PLATFORM", [Platform this server runs on])
+
+# set directories
+# ---------------------------------------------------------------------------
+AC_CONFIG_HEADERS([include/tichu/config.h])
+AC_CONFIG_SRCDIR([src/tichu.c])
+
+# check for programs needed to build tichu-server
+# ---------------------------------------------------------------------------
+AC_DIETLIBC([/opt/diet /usr/diet])
+AC_PROG_CC([cc gcc])
+AC_PROG_INSTALL
+
+AC_CANONICAL_HOST
+AC_CANONICAL_BUILD
+
+AC_CONFIG_HOST
+AC_CONFIG_DYLIB
+
+AC_CHECK_CHAOS
+
+if test "$libchaos" = "shipped"; then
+  AC_CHECK_SSL
+  AC_CHECK_MYSQL
+fi
+
+# set debugging stuff after compiler test (-Werror could fuck it up)
+# ---------------------------------------------------------------------------
+AC_CHECK_DEP
+AC_CHECK_DEBUG
+AC_CHECK_MAINTAINER
+
+# library subdirectories
+# ---------------------------------------------------------------------------
+AC_CONFIG_FILES([
+Makefile
+config.mk
+build.mk
+src/Makefile
+bot/Makefile
+data/Makefile
+include/Makefile
+include/tichu/Makefile
+modules/Makefile
+modules/msg/Makefile])
+
+AC_CONFIG_STATUS
+
+# be verbose :)
+# ---------------------------------------------------------------------------
+AC_SUMMARIZE([prefix bindir datadir includedir],
+             [COLOR DEP DEBUG | CC CFLAGS LDFLAGS LIBS],
+             "%20s: %s")

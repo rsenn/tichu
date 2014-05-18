@@ -1,0 +1,345 @@
+;
+;
+; j = jade
+; p = pagode
+; s = sword
+; t = star
+; x = special
+;
+;
+; xp = phoenix
+; xd = drachen
+; xh = hund
+; x1 = 1
+;
+;
+;----------------------------------------------------------------
+; Value wird immer um 2 erhört, da der Wert des Phönix 0.5
+; höher ist, und ich keine komastellen möchte, machen wir das 
+; halt nun mal so... (pasta) (ham)
+;--------------------------- jade -------------------------------
+[j2]
+x=0
+y=0
+value=4
+
+[j3]
+x=1
+y=0
+value=6
+
+[j4]
+x=2
+y=0
+value=8
+
+[j5]
+x=3
+y=0
+points=5
+value=10
+
+[j6]
+x=4
+y=0
+value=12
+
+[j7]
+x=5
+y=0
+value=14
+
+[j8]
+x=6
+y=0
+value=16
+
+[j9]
+x=7
+y=0
+value=18
+
+[j0]
+x=8
+y=0
+points=10
+value=20
+
+[jj]
+x=9
+y=0
+value=22
+
+[jq]
+x=10
+y=0
+value=24
+
+[jk]
+x=11
+y=0
+points=10
+value=26
+
+[ja]
+x=12
+y=0
+value=28
+
+;--------------------------- pagode -------------------------------
+[p2]
+x=0
+y=1
+value=4
+
+[p3]
+x=1
+y=1
+value=6
+
+[p4]
+x=2
+y=1
+value=8
+
+[p5]
+x=3
+y=1
+points=5
+value=10
+
+[p6]
+x=4
+y=1
+value=12
+
+[p7]
+x=5
+y=1
+value=14
+
+[p8]
+x=6
+y=1
+value=16
+
+[p9]
+x=7
+y=1
+value=18
+
+[p0]
+x=8
+y=1
+points=10
+value=20
+
+[pj]
+x=9
+y=1
+value=22
+
+[pq]
+x=10
+y=1
+value=24
+
+[pk]
+x=11
+y=1
+points=10
+value=26
+
+[pa]
+x=12
+y=1
+value=28
+
+;--------------------------- sword -------------------------------
+
+[s2]
+x=0
+y=2
+value=4
+
+[s3]
+x=1
+y=2
+value=6
+
+[s4]
+x=2
+y=2
+value=8
+
+[s5]
+x=3
+y=2
+points=5
+value=10
+
+[s6]
+x=4
+y=2
+value=12
+
+[s7]
+x=5
+y=2
+value=14
+
+[s8]
+x=6
+y=2
+value=16
+
+[s9]
+x=7
+y=2
+value=18
+
+[s0]
+x=8
+y=2
+points=10
+value=20
+
+[sj]
+x=9
+y=2
+value=22
+
+[sq]
+x=10
+y=2
+value=24
+
+[sk]
+x=11
+y=2
+points=10
+value=26
+
+[sa]
+x=12
+y=2
+value=28
+
+;--------------------------- sword -------------------------------
+
+[t2]
+x=0
+y=3
+value=4
+
+[t3]
+x=1
+y=3
+value=6
+
+[t4]
+x=2
+y=3
+value=8
+
+[t5]
+x=3
+y=3
+points=5
+value=10
+
+[t6]
+x=4
+y=3
+value=12
+
+[t7]
+x=5
+y=3
+value=14
+
+[t8]
+x=6
+y=3
+value=16
+
+[t9]
+x=7
+y=3
+value=18
+
+[t0]
+x=8
+y=3
+points=10
+value=20
+
+[tj]
+x=9
+y=3
+value=22
+
+[tq]
+x=10
+y=3
+value=24
+
+[tk]
+x=11
+y=3
+points=10
+value=26
+
+[ta]
+x=12
+y=3
+value=28
+
+;--------------------------- special -------------------------------
+
+; Drachen
+; -----------------------------------
+; höchste einzelkarte und kann nur als solche gespielt werden
+; daher value=15 da dies der höchste wert
+; punkte = 25, jedoch muss der ganze stich an einen gegnerischen spieler
+; verschenkt werden
+[xd]
+x=13
+y=3
+points=25
+value=30
+
+; Phoenix
+; -----------------------------------
+; Wert als Einzelkarte:
+; einen halben Punkt höher als die letzte Karte (ausser beim Drachen)
+; In Kombination:
+; Funktioniert als Joker
+[xp]
+x=13
+y=2
+value=1
+points=-25
+
+; Hund
+; -----------------------------------
+; Gibt das Ausspielrecht an den Partner weiter.
+; Kann nur als Einzelkarte AUSgespielt werden.
+[xh]
+x=13
+y=1
+value=0
+points=0
+
+; Mah Jong (oder auch 'die eins')
+; -----------------------------------
+; Der Mah-Jong hat den Wert eins und derjenige der ihn auf der Hand hat,
+; beginnt das Spiel.
+; Kann als Einzelkarte oder in Kombination (Strasse) gespielt werden.
+; Beim Ausspielen der Karte darf sich der spieler eine Karte wünschen welche
+; der nächste Spieler, der diesem Wunsch gerecht werden kann, spielen muss.
+[x1]
+x=13
+y=0
+value=2
+points=0

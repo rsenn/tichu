@@ -1,0 +1,425 @@
+; : makedef.sh,v 1.10 2005/05/22 02:44:34 smoli Exp $
+;
+; win32 dll exports
+
+LIBRARY         sgui.dll
+DESCRIPTION     "sgUI v2.0.0rc4 - smooth graphical user-interface (c) 2004-2005 by Roman Senn"
+
+EXPORTS
+; sgui.c
+
+sgInit                     @1
+sgLinkedVersion            @2
+sgQuit                     @3
+
+; list.c
+
+sgAddListBefore            @8
+sgAddListHead              @9
+sgAddListTail              @10
+sgDeleteList               @11
+sgFindList                 @12
+sgFindListDelete           @13
+sgIndexList                @14
+
+; file.c
+
+sgAddFilePath              @24
+sgClearFilePaths           @25
+sgGetFilePath              @26
+sgGetFilePaths             @27
+sgLoadFileText             @28
+sgOpenFileFp               @29
+sgOpenFileRWops            @30
+
+; png.c
+
+sgLoadPngFile              @40
+sgLoadPngFp                @41
+sgLoadPngMemory            @42
+sgLoadPngRWops             @43
+sgSavePngFile              @44
+sgSavePngFp                @45
+sgSavePngMemory            @46
+sgSavePngRWops             @47
+
+; font.c
+
+sgAddFont                  @56
+sgConvertFont              @57
+sgDrawChar                 @58
+sgDrawText                 @59
+sgDrawTextOutline          @60
+sgFontHeight               @61
+sgFreeFont                 @62
+sgFreeFonts                @63
+sgGetFirstFont             @64
+sgGetFont                  @65
+sgInitFonts                @66
+sgLoadFontFile             @67
+sgLoadFontFp               @68
+sgLoadFontRWops            @69
+sgTextHeight               @70
+sgTextWidth                @71
+
+; picts.c
+
+sgCopyPict                 @80
+sgPutPict                  @81
+
+; pattern.c
+
+sgFillPattern              @88
+sgFindPattern              @89
+sgGetPatternTable          @90
+sgInitPatterns             @91
+
+; common.c
+
+sgAlphaBlit                @96
+sgBlendHLine               @97
+sgBlendVLine               @98
+sgBlur                     @99
+sgClip                     @100
+sgCopy                     @101
+sgCopyPalette              @102
+sgCreateBWPalette          @103
+sgCreatePalette            @104
+sgDrawFrame                @105
+sgDrawGradient             @106
+sgDrawHLine                @107
+sgDrawRect                 @108
+sgDrawSingleFrame          @109
+sgDrawVLine                @110
+sgDumpColor                @111
+sgDumpRect                 @112
+sgFade                     @113
+sgHSVToRGB                 @114
+sgIntersect                @115
+sgLog                      @116
+sgMatchRect                @117
+sgMergeRect                @118
+sgRGBToHSV                 @119
+
+; widget.c
+
+sgBlitWidget               @128
+sgClearWidgetFace          @129
+sgClearWidgetStatus        @130
+sgConvertWidgetBorder      @131
+sgConvertWidgetContent     @132
+sgConvertWidgetFrame       @133
+sgCreateWidgetBorder       @134
+sgCreateWidgetContent      @135
+sgCreateWidgetFace         @136
+sgCreateWidgetFrame        @137
+sgDeleteWidget             @138
+sgDisableWidget            @139
+sgDrawWidgetBorder         @140
+sgEnableWidget             @141
+sgFreeWidget               @142
+sgFreeWidgetFace           @143
+sgGetWidgetCaption         @144
+sgGetWidgetMouse           @145
+sgHandleWidgetEvent        @146
+sgHandleWidgetHilite       @147
+sgHasWidgetFocus           @148
+sgHideWidget               @149
+sgLoadWidgetFont           @150
+sgLoadWidgetFonts          @151
+sgNewWidget                @152
+sgNewWidgetRect            @153
+sgRecalcWidget             @154
+sgRedrawWidget             @155
+sgReportWidgetEvent        @156
+sgSetWidgetBorder          @157
+sgSetWidgetBorderColor     @158
+sgSetWidgetBorderRGB       @159
+sgSetWidgetCaption         @160
+sgSetWidgetColor           @161
+sgSetWidgetContentColor    @162
+sgSetWidgetContentRGB      @163
+sgSetWidgetFont            @164
+sgSetWidgetFonts           @165
+sgSetWidgetFrameColor      @166
+sgSetWidgetFrameRGB        @167
+sgSetWidgetPos             @168
+sgSetWidgetProc            @169
+sgSetWidgetRGB             @170
+sgSetWidgetRect            @171
+sgSetWidgetSize            @172
+sgSetWidgetStatus          @173
+sgShowWidget               @174
+sgSplitWidget              @175
+sgvSetWidgetCaption        @176
+
+; dialog.c
+
+sgBlitDialog               @184
+sgBlitDialogCursor         @185
+sgHandleDialogEvent        @186
+sgNewDialog                @187
+sgRecalcDialog             @188
+sgRedrawDialog             @189
+sgRunDialog                @190
+sgSetDialogContrast        @191
+sgSetDialogCursor          @192
+sgSetDialogCursorTheme     @193
+sgSetDialogPattern         @194
+sgSetDialogTimer           @195
+
+; adjust.c
+
+sgGetAdjustValue           @200
+sgHandleAdjustEvent        @201
+sgNewAdjust                @202
+sgNewAdjustAligned         @203
+sgNewAdjustGrouped         @204
+sgNewAdjustRect            @205
+sgNewAdjustSplitted        @206
+sgRecalcAdjust             @207
+sgRedrawAdjust             @208
+sgSetAdjustFormat          @209
+sgSetAdjustValue           @210
+
+; button.c
+
+sgHandleButtonEvent        @216
+sgLoadButtonImage          @217
+sgNewButton                @218
+sgNewButtonGrouped         @219
+sgNewButtonRect            @220
+sgNewButtonSplitted        @221
+sgRecalcButton             @222
+sgRedrawButton             @223
+sgSetButtonPict            @224
+sgSetButtonState           @225
+
+; console.c
+
+sgAddConsoleLine           @232
+sgAddConsoleLineWrapped    @233
+sgAddConsoleText           @234
+sgClearConsole             @235
+sgDeleteConsoleLine        @236
+sgFreeConsole              @237
+sgGetConsoleLineByNum      @238
+sgGetConsoleText           @239
+sgHandleConsoleEvent       @240
+sgLoadConsoleText          @241
+sgNewConsole               @242
+sgNewConsoleFull           @243
+sgNewConsoleGrouped        @244
+sgNewConsoleSplitted       @245
+sgRecalcConsole            @246
+sgRedrawConsole            @247
+sgScrollConsole            @248
+sgSetConsoleText           @249
+
+; edit.c
+
+sgDeleteEditChar           @256
+sgGetEditCaption           @257
+sgHandleEditEvent          @258
+sgInsertEditChar           @259
+sgNewEdit                  @260
+sgNewEditGrouped           @261
+sgNewEditSplitted          @262
+sgRecalcEdit               @263
+sgRedrawEdit               @264
+sgRemoveEditChar           @265
+sgSetEditCaption           @266
+
+; group.c
+
+sgAddGroup                 @272
+sgBlitGroupTab             @273
+sgHandleGroupEvent         @274
+sgLoadGroupImage           @275
+sgNewGroup                 @276
+sgNewGroupAligned          @277
+sgNewGroupFull             @278
+sgNewGroupRect             @279
+sgNewGroupSplitted         @280
+sgRecalcGroup              @281
+sgRedrawGroup              @282
+sgSetGroupAlign            @283
+sgSetGroupImage            @284
+sgSetGroupTab              @285
+sgSubGroup                 @286
+
+; history.c
+
+sgAddHistoryEntry          @296
+sgClearHistory             @297
+sgFreeHistory              @298
+sgGetHistory               @299
+sgNewHistory               @300
+sgNextHistoryEntry         @301
+sgPrevHistoryEntry         @302
+
+; image.c
+
+sgBlitImage                @312
+sgHandleImageEvent         @313
+sgLoadImageFile            @314
+sgLoadImageFp              @315
+sgLoadImageRWops           @316
+sgNewImage                 @317
+sgNewImageGrouped          @318
+sgNewImageRect             @319
+sgNewImageSplitted         @320
+sgRecalcImage              @321
+sgRedrawImage              @322
+sgSetImageSurface          @323
+
+; input.c
+
+sgDeleteInput              @328
+sgDeleteInputChar          @329
+sgHandleInputEvent         @330
+sgInsertInputChar          @331
+sgNewInput                 @332
+sgNewInputGrouped          @333
+sgRecalcInput              @334
+sgRedrawInput              @335
+sgRemoveInputChar          @336
+
+; label.c
+
+sgNewLabel                 @344
+sgNewLabelAligned          @345
+sgNewLabelGrouped          @346
+sgNewLabelSplitted         @347
+sgRecalcLabel              @348
+sgRedrawLabel              @349
+
+; listbox.c
+
+sgAddListboxItem           @352
+sgClearListbox             @353
+sgDeleteListboxItem        @354
+sgFreeListbox              @355
+sgGetListboxIndex          @356
+sgGetListboxIndexByCaption @357
+sgGetListboxIndexByValue   @358
+sgGetListboxItem           @359
+sgGetListboxItemByCaption  @360
+sgGetListboxItemByValue    @361
+sgHandleListboxEvent       @362
+sgInsertListboxItem        @363
+sgNewListbox               @364
+sgNewListboxAligned        @365
+sgNewListboxFull           @366
+sgNewListboxGrouped        @367
+sgRecalcListbox            @368
+sgRedrawListbox            @369
+sgScrollListbox            @370
+sgSelectListboxIndex       @371
+sgSelectListboxItem        @372
+sgSelectedListboxIndex     @373
+sgSelectedListboxItem      @374
+sgSetListboxItemSymbol     @375
+
+; tab.c
+
+sgAddTabGroup              @384
+sgHandleTabEvent           @385
+sgNewTab                   @386
+sgNewTabFull               @387
+sgNewTabRect               @388
+sgRecalcTab                @389
+sgRedrawTab                @390
+sgSelectTabGroup           @391
+sgSelectedTabGroup         @392
+
+; dropdown.c
+
+sgAddDropdownItem          @400
+sgClearDropdown            @401
+sgDeleteDropdownItem       @402
+sgDeployDropdown           @403
+sgDropdownGetItemByNum     @404
+sgFreeDropdown             @405
+sgGetDropdownItemByCaption @406
+sgGetDropdownItemByValue   @407
+sgHandleDropdownEvent      @408
+sgInsertDropdownItem       @409
+sgNewDropdown              @410
+sgNewDropdownGrouped       @411
+sgNewDropdownSplitted      @412
+sgRecalcDropdown           @413
+sgRedrawDropdown           @414
+sgScrollDropdown           @415
+sgSelectDropdownItem       @416
+sgSelectedDropdownItem     @417
+sgToggleDropdown           @418
+sgUndeployDropdown         @419
+
+; cursor.c
+
+sgAllocCursorBackup        @424
+sgAllocCursorSurface       @425
+sgBackupCursorBgnd         @426
+sgBlitCursor               @427
+sgChangeCursorTheme        @428
+sgClearCursorBgnd          @429
+sgCopyCursorSurface        @430
+sgDeleteCursorTheme        @431
+sgDeleteCursorThemes       @432
+sgFindCursorTheme          @433
+sgFreeCursorSurface        @434
+sgGetCursorFace            @435
+sgGetCursorSurface         @436
+sgGetCursorTheme           @437
+sgGetCursorThemes          @438
+sgLoadCursorTheme          @439
+sgNewCursorTheme           @440
+sgOpenCursorTheme          @441
+sgOpenCursorThemeFp        @442
+sgOpenCursorThemes         @443
+sgParseCursorTheme         @444
+sgRestoreCursorBgnd        @445
+sgSetCursorFace            @446
+sgSetCursorInfo            @447
+sgSetCursorPos             @448
+sgSetCursorSurface         @449
+sgSetCursorTheme           @450
+sgUnloadCursorTheme        @451
+sgUpdateCursor             @452
+
+; toggle.c
+
+sgHandleToggleEvent        @456
+sgNewToggle                @457
+sgNewToggleGrouped         @458
+sgNewToggleRect            @459
+sgNewToggleSplitted        @460
+sgRecalcToggle             @461
+sgRedrawToggle             @462
+sgSetToggleState           @463
+
+; colorsel.c
+
+sgBlitColorSel             @472
+sgGetColorSelHSV           @473
+sgGetColorSelHue           @474
+sgGetColorSelPos           @475
+sgGetColorSelRGB           @476
+sgGetColorSelSaturation    @477
+sgGetColorSelValue         @478
+sgHandleColorSelEvent      @479
+sgNewColorSel              @480
+sgNewColorSelAligned       @481
+sgNewColorSelGrouped       @482
+sgNewColorSelRect          @483
+sgNewColorSelSplitted      @484
+sgRecalcColorSel           @485
+sgRedrawColorSel           @486
+sgSetColorSelHSV           @487
+sgSetColorSelHue           @488
+sgSetColorSelPos           @489
+sgSetColorSelRGB           @490
+sgSetColorSelSaturation    @491
+sgSetColorSelValue         @492
+

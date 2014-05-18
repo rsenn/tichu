@@ -1,0 +1,342 @@
+.TH "sgConsole: Console widget" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgConsole: Console widget \- A console widget displays a scrollable box which can contain lines of text.  
+
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgConsole\fP"
+.br
+.RI "\fIa specialised structure for a console widget \fP"
+.ti -1c
+.RI "struct \fBsgConsoleLine\fP"
+.br
+.RI "\fIA console line contains only a caption. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgConsole\fP(w)   (w)->data.console"
+.br
+.RI "\fIA macro to access console specific widget data. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgConsoleLine\fP \fBsgConsoleLine\fP"
+.br
+.RI "\fIConsole line type. \fP"
+.ti -1c
+.RI "typedef \fBsgConsole\fP \fBsgConsole\fP"
+.br
+.RI "\fIData type for console specific storage. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewConsoleFull\fP (\fBsgWidget\fP *parent, const char *caption)"
+.br
+.RI "\fICreates a new console widget using full dialog size. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewConsoleSplitted\fP (\fBsgWidget\fP *based, \fBsgEdge\fP edge, int pixels, const char *caption)"
+.br
+.RI "\fICreates a new console widget by splitting another. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewConsoleGrouped\fP (\fBsgWidget\fP *group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new button widget and adds it to a group. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewConsole\fP (\fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new console widget. \fP"
+.ti -1c
+.RI "void \fBsgRecalcConsole\fP (\fBsgWidget\fP *console)"
+.br
+.RI "\fIRecalculates internal console rectangles. \fP"
+.ti -1c
+.RI "void \fBsgRedrawConsole\fP (\fBsgWidget\fP *console)"
+.br
+.RI "\fIRedraws console widget. \fP"
+.ti -1c
+.RI "int \fBsgHandleConsoleEvent\fP (\fBsgWidget\fP *console, SDL_Event *event)"
+.br
+.RI "\fIHandles an incoming event for a console widget. \fP"
+.ti -1c
+.RI "\fBsgConsoleLine\fP * \fBsgInsertConsoleLine\fP (\fBsgWidget\fP *console, const char *caption, int pos)"
+.br
+.RI "\fICreate and insert line into console at the specified position. \fP"
+.ti -1c
+.RI "\fBsgConsoleLine\fP * \fBsgAddConsoleLine\fP (\fBsgWidget\fP *console, const char *caption)"
+.br
+.RI "\fICreate and append line to a console. \fP"
+.ti -1c
+.RI "void \fBsgAddConsoleLineWrapped\fP (\fBsgWidget\fP *console, const char *caption)"
+.br
+.RI "\fICreate and append lines to a console. \fP"
+.ti -1c
+.RI "void \fBsgDeleteConsoleLine\fP (\fBsgWidget\fP *console, \fBsgConsoleLine\fP *line)"
+.br
+.RI "\fIDeletes a line from a console. \fP"
+.ti -1c
+.RI "void \fBsgClearConsole\fP (\fBsgWidget\fP *console)"
+.br
+.RI "\fIClears all console lines. \fP"
+.ti -1c
+.RI "void \fBsgAddConsoleText\fP (\fBsgWidget\fP *console, const char *text)"
+.br
+.RI "\fIAdds text to a console while wrapping and splitting newlines. \fP"
+.ti -1c
+.RI "void \fBsgSetConsoleText\fP (\fBsgWidget\fP *console, const char *text)"
+.br
+.RI "\fISets a new console text while wrapping and splitting newlines. \fP"
+.ti -1c
+.RI "char * \fBsgGetConsoleText\fP (\fBsgWidget\fP *console)"
+.br
+.RI "\fIConverts the lines of a console into a string (imploding using 
+.br
+). \fP"
+.ti -1c
+.RI "\fBsgConsoleLine\fP * \fBsgGetConsoleLineByNum\fP (\fBsgWidget\fP *console, int num)"
+.br
+.RI "\fIGets console line by its index. \fP"
+.ti -1c
+.RI "int \fBsgScrollConsole\fP (\fBsgWidget\fP *console, int pos, int force, int setrect)"
+.br
+.RI "\fIScrolls the console widget. \fP"
+.ti -1c
+.RI "void \fBsgFreeConsole\fP (\fBsgWidget\fP *console)"
+.br
+.RI "\fIFrees all data associated with a console. \fP"
+.ti -1c
+.RI "int \fBsgLoadConsoleText\fP (\fBsgWidget\fP *console, const char *file)"
+.br
+.RI "\fILoads the text of a console from a file. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgConsoleType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the console widget. \fP"
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgConsoleType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the console widget. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+A console widget displays a scrollable box which can contain lines of text. 
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgWidget\fP * sgNewConsoleFull (\fBsgWidget\fP * parent, const char * caption)"
+.PP
+Creates a new console widget using full dialog size. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP parent widget 
+.br
+\fIcaption\fP console caption
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewConsoleSplitted (\fBsgWidget\fP * based, \fBsgEdge\fP edge, int pixels, const char * caption)"
+.PP
+Creates a new console widget by splitting another. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbased\fP widget which we'll split 
+.br
+\fIedge\fP at which edge «based» will be splitted 
+.br
+\fIpixels\fP how many pixels to split off 
+.br
+\fIcaption\fP console caption
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewConsoleGrouped (\fBsgWidget\fP * group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new button widget and adds it to a group. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP group the editbox will be added to 
+.br
+\fIedge\fP at which edge «group» will be splitted 
+.br
+\fIalign\fP alignment of the button inside the group 
+.br
+\fIw\fP width of the button 
+.br
+\fIh\fP height of the button 
+.br
+\fIcaption\fP initial button text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created button or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewConsole (\fBsgWidget\fP * parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new console widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP widget which will contain the console 
+.br
+\fIx\fP x-position of the console relative to the parent 
+.br
+\fIy\fP y-position of the console relative to the parent 
+.br
+\fIw\fP width of the console 
+.br
+\fIh\fP height of the console 
+.br
+\fIcaption\fP console caption
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created console or NULL on error
+.RE
+.PP
+
+.SS "void sgRecalcConsole (\fBsgWidget\fP * console)"
+.PP
+Recalculates internal console rectangles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP console to recalculate
+.RE
+.PP
+
+.SS "void sgRedrawConsole (\fBsgWidget\fP * console)"
+.PP
+Redraws console widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP console widget to redraw
+.RE
+.PP
+
+.SS "int sgHandleConsoleEvent (\fBsgWidget\fP * console, SDL_Event * event)"
+.PP
+Handles an incoming event for a console widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP console widget which receives the event 
+.br
+\fIevent\fP an SDL_Event structure from SDL_PollEvent()
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 if some action has taken place, 0 otherwise
+.RE
+.PP
+
+.SS "\fBsgConsoleLine\fP* sgInsertConsoleLine (\fBsgWidget\fP * console, const char * caption, int pos)"
+.PP
+Create and insert line into console at the specified position. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP the console which will have an line added 
+.br
+\fIcaption\fP caption of the new line 
+.br
+\fIpos\fP insert position
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns the new line
+.RE
+.PP
+
+.SS "\fBsgConsoleLine\fP * sgAddConsoleLine (\fBsgWidget\fP * console, const char * caption)"
+.PP
+Create and append line to a console. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP the console which will have a line added 
+.br
+\fIcaption\fP caption of the new line
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns the new line
+.RE
+.PP
+
+.SS "void sgAddConsoleLineWrapped (\fBsgWidget\fP * console, const char * caption)"
+.PP
+Create and append lines to a console. 
+.PP
+If the line is longer than the column count it will be splitted up into several lines
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP the console which will have lines added 
+.br
+\fIcaption\fP text to add
+.RE
+.PP
+
+.SS "\fBsgConsoleLine\fP * sgGetConsoleLineByNum (\fBsgWidget\fP * console, int num)"
+.PP
+Gets console line by its index. 
+.PP
+(Be careful, information about wrapped lines is lost!)
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconsole\fP where to get the line from 
+.br
+\fInum\fP line index
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBsgWidgetType\fP \fBsgConsoleType\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .name = 'sgConsole',
+  .size = sizeof(sgConsole),
+  .methods =
+  {
+    .recalc = sgRecalcConsole,
+    .redraw = sgRedrawConsole,
+    .handler = sgHandleConsoleEvent,
+    .blit = sgBlitWidget,
+    .delete = sgClearConsole
+  }  
+}
+.fi
+Configuration and initial methods of the console widget. 
+.PP
+

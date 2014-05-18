@@ -1,0 +1,119 @@
+# $Id: configure.in,v 1.36 2005/05/26 10:48:34 smoli Exp $
+# ===========================================================================
+#
+# GNU autoconf template for libsgui
+#
+# initialize autoconf (require version 2.5x)
+# ---------------------------------------------------------------------------
+AC_PREREQ(2.50)
+AC_INIT([libsgui],[2.0.0rc4])
+
+# check for compiling modes
+# ---------------------------------------------------------------------------
+AC_CHECK_COLOR
+
+# set some info stuff
+# ---------------------------------------------------------------------------
+AC_SET_ARGS
+PACKAGE_RELEASE="peace & love hippie edition"
+AC_DEFINE_UNQUOTED(PACKAGE_RELEASE, "$PACKAGE_RELEASE", [Define to the release name of this package.])
+
+VERSION=${PACKAGE_VERSION%%[[a-z]]*}
+
+VERSION_MAJOR=${VERSION%%.[[0-9]]*}
+VERSION_MINOR=${VERSION#*[0-9].}
+VERSION_MINOR=${VERSION_MINOR%.[[0-9]]*}
+VERSION_PATCH=${VERSION##*[0-9].}
+
+AC_SUBST(VERSION_MAJOR)
+AC_SUBST(VERSION_MINOR)
+AC_SUBST(VERSION_PATCH)
+
+CREATION=$(date)
+PLATFORM=$(uname -a)
+AC_DEFINE_UNQUOTED(CREATION, "$CREATION", [Creation time of this lib])
+AC_DEFINE_UNQUOTED(PLATFORM, "$PLATFORM", [Platform this lib runs on])
+
+# set directories
+# ---------------------------------------------------------------------------
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([src/sgui.c])
+AC_CONFIG_AUX_DIR([.])
+
+# set extensions and flags
+# ---------------------------------------------------------------------------
+DFLAGS="-g -ggdb"
+WFLAGS="-Wall -Werror"
+FFLAGS=""
+
+# check for libs and programs needed to build libsgui
+# ---------------------------------------------------------------------------
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+
+AC_PROG_CC([cc gcc])
+AC_PROG_AR
+AC_PROG_RANLIB
+AC_PROG_INSTALL
+AC_PROG_LN
+AC_PROG_DOXYGEN
+AC_PROG_DLLWRAP
+
+# check some system dependencies
+# ---------------------------------------------------------------------------
+AM_PATH_SDL(1.2.6)
+
+AC_CHECK_LIBPNG
+
+AC_CONFIG_HOST
+AC_CONFIG_DYLIB
+
+dnl AC_C_BIGENDIAN([ENDIAN="ENDIAN_BIG"],
+dnl                [ENDIAN="ENDIAN_LIL"])
+    
+dnl AC_SUBST(ENDIAN)
+
+dnl AC_DEFINE_UNQUOTED(ENDIAN_LIL, 0, [Little endian machine])
+dnl AC_DEFINE_UNQUOTED(ENDIAN_BIG, 1, [Big endian machine])
+dnl AC_DEFINE_UNQUOTED(ENDIAN, $ENDIAN, [Define your machines endian])
+
+IA32INLINE="0"
+
+# set debugging stuff after compiler test (-Werror could fuck it up)
+# ---------------------------------------------------------------------------
+AC_CHECK_DEP
+AC_CHECK_DEBUG
+AC_CHECK_MAINTAINER
+
+# library subdirectories
+# ---------------------------------------------------------------------------
+AC_CONFIG_FILES([
+Makefile
+config.mk
+build.mk
+src/Makefile
+include/Makefile
+include/libsgui/Makefile
+cursors/Makefile
+fonts/Makefile
+tools/Makefile
+tools/libsgui-config
+examples/Makefile
+doc/Makefile
+doc/Doxyfile
+doc/html/Makefile
+doc/man/Makefile
+doc/man/man3/Makefile])
+
+AC_CONFIG_STATUS
+
+# be verbose :)
+# ---------------------------------------------------------------------------
+AC_SUMMARIZE([prefix bindir libdir includedir datadir mandir],
+             [A_ENABLE PIE_ENABLE 
+              COLOR DEP DEBUG |
+              build host |
+              CC CFLAGS LDFLAGS LIBS PIC_CFLAGS PIE_LDFLAGS |
+              SDL_CFLAGS SDL_LIBS |
+              LIBPNG_CFLAGS LIBPNG_LIBS],
+             "%20s: %s")

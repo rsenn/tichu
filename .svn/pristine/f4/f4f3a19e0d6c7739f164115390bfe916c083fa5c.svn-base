@@ -1,0 +1,41 @@
+.TH "sgDropdownItem" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgDropdownItem \- An item of a dropdown contains a caption and optionally a surface for symbols.  
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <dropdown.h>\fP
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBsgNode\fP \fBnode\fP"
+.br
+.RI "\fInode for linking to the item list \fP"
+.ti -1c
+.RI "char \fBcaption\fP [256]"
+.br
+.RI "\fIcaption string \fP"
+.ti -1c
+.RI "void * \fBvalue\fP"
+.br
+.RI "\fIuser-defined pointer \fP"
+.ti -1c
+.RI "SDL_Surface * \fBsurface\fP"
+.br
+.RI "\fIsurface which contains the symbols \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+An item of a dropdown contains a caption and optionally a surface for symbols. 
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsgui from the source code.

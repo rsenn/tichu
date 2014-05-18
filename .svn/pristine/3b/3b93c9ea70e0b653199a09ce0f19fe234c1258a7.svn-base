@@ -1,0 +1,270 @@
+.TH "sgList: Handles doubly-linked lists" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgList: Handles doubly-linked lists \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgNode\fP"
+.br
+.RI "\fIAn element of a list. \fP"
+.ti -1c
+.RI "struct \fBsgList\fP"
+.br
+.RI "\fIA dlink list contains a pointer to the head item and to the tail node and the count of the nodes. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgForeachDown\fP(list, n)"
+.br
+.RI "\fIWalks through a linked list from head to tail, «n» is set to the current node. \fP"
+.ti -1c
+.RI "#define \fBsgForeachDownData\fP(list, n, d)"
+.br
+.RI "\fIWalks through a linked list from head to tail, and «d» is set to n->data. \fP"
+.ti -1c
+.RI "#define \fBsgForeachDownSafe\fP(list, n, m)"
+.br
+.RI "\fISafely walks through a linked list from head to tail (that means you can remove the current node while looping) «n» is set to the current node and n->next is backupped into «m» before loop body for safe walk-throught when nodes get deleted. \fP"
+.ti -1c
+.RI "#define \fBsgForeachDownSafeData\fP(list, n, m, d)"
+.br
+.RI "\fISame as sgForeachDownSafe but sets «d» = n->data. \fP"
+.ti -1c
+.RI "#define \fBsgForeachUp\fP(list, n)"
+.br
+.RI "\fIWalks through a linked list from tail to head, «n» is set to the current node. \fP"
+.ti -1c
+.RI "#define \fBsgForeachUpData\fP(list, n, d)"
+.br
+.RI "\fIWalks through a linked list from tail to head, and «d» is set to n->data. \fP"
+.ti -1c
+.RI "#define \fBsgForeachUpSafe\fP(list, n, m)"
+.br
+.RI "\fISafely walks through a linked list from tail to head (that means you can remove the current node while looping) «n» is set to the current node and n->next is backupped into «m» before loop body for safe walk-throught when nodes get deleted. \fP"
+.ti -1c
+.RI "#define \fBsgForeachUpSafeData\fP(list, n, m, d)"
+.br
+.RI "\fISame as sgForeachUpSafe but sets «d» = n->data. \fP"
+.ti -1c
+.RI "#define \fBsgForeach\fP   sgForeachDown"
+.br
+.RI "\fIAlias for convenience, lists are normally walked through from head to tail. \fP"
+.ti -1c
+.RI "#define \fBsgForeachData\fP   sgForeachDownData"
+.br
+.RI "\fIAlias for convenience, lists are normally walked through from head to tail. \fP"
+.ti -1c
+.RI "#define \fBsgForeachSafe\fP   sgForeachDownSafe"
+.br
+.RI "\fIAlias for convenience, lists are normally walked through from head to tail. \fP"
+.ti -1c
+.RI "#define \fBsgForeachSafeData\fP   sgForeachDownSafeData"
+.br
+.RI "\fIAlias for convenience, lists are normally walked through from head to tail. \fP"
+.ti -1c
+.RI "#define \fBsgAddList\fP   sgAddListTail"
+.br
+.RI "\fIAlias for convenience, new nodes are normally added to the tail of the list. \fP"
+.ti -1c
+.RI "#define \fBsgZeroNode\fP(x)"
+.br
+.RI "\fIZero a node. \fP"
+.ti -1c
+.RI "#define \fBsgZeroList\fP(x)"
+.br
+.RI "\fIZero a dlink list. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgNode\fP \fBsgNode\fP"
+.br
+.RI "\fIA node on a \fBsgList\fP. \fP"
+.ti -1c
+.RI "typedef \fBsgList\fP \fBsgList\fP"
+.br
+.RI "\fIA doubly-linked list consisting of \fBsgNode\fP structures. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsgAddListHead\fP (\fBsgList\fP *list, \fBsgNode\fP *node, void *ptr)"
+.br
+.RI "\fIAdd node to the head of the list. \fP"
+.ti -1c
+.RI "void \fBsgAddListTail\fP (\fBsgList\fP *list, \fBsgNode\fP *node, void *ptr)"
+.br
+.RI "\fIAdd node to the tail of the list. \fP"
+.ti -1c
+.RI "void \fBsgAddListBefore\fP (\fBsgList\fP *list, \fBsgNode\fP *node, \fBsgNode\fP *before, void *ptr)"
+.br
+.RI "\fIAdd node to the list before the specified node. \fP"
+.ti -1c
+.RI "void \fBsgDeleteList\fP (\fBsgList\fP *list, \fBsgNode\fP *node)"
+.br
+.RI "\fIRemove the node from the list. \fP"
+.ti -1c
+.RI "\fBsgNode\fP * \fBsgFindList\fP (\fBsgList\fP *list, void *ptr)"
+.br
+.RI "\fIFind a node in list. \fP"
+.ti -1c
+.RI "\fBsgNode\fP * \fBsgFindListDelete\fP (\fBsgList\fP *list, void *ptr)"
+.br
+.RI "\fIFind a node in a list and delete it. \fP"
+.ti -1c
+.RI "\fBsgNode\fP * \fBsgIndexList\fP (\fBsgList\fP *list, size_t index)"
+.br
+.RI "\fIIndex a node in a list. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define sgForeachDown(list, n)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->head; \
+      (n) != NULL; \
+      (n) = (void *)(((sgNode *)n)->next))
+.fi
+Walks through a linked list from head to tail, «n» is set to the current node. 
+.PP
+.SS "#define sgForeachDownData(list, n, d)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->head; \
+      ((n) != NULL) && (((d) = (void *)((sgNode *)n)->data) != NULL); \
+      (n) = (void *)((sgNode *)n)->next)
+.fi
+Walks through a linked list from head to tail, and «d» is set to n->data. 
+.PP
+.SS "#define sgForeachDownSafe(list, n, m)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->head, \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->next : NULL; \
+      (n) != NULL; \
+      (n) = (void *)((sgNode *)m), \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->next : NULL)
+.fi
+Safely walks through a linked list from head to tail (that means you can remove the current node while looping) «n» is set to the current node and n->next is backupped into «m» before loop body for safe walk-throught when nodes get deleted. 
+.PP
+.SS "#define sgForeachDownSafeData(list, n, m, d)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->head, \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->next : NULL; \
+      ((n) != NULL) && (((d) = (void *)((sgNode *)n)->data) != NULL); \
+      (n) = (void *)((sgNode *)m), \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->next : NULL)
+.fi
+Same as sgForeachDownSafe but sets «d» = n->data. 
+.PP
+.SS "#define sgForeachUp(list, n)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->tail; \
+      (n) != NULL; \
+      (n) = (void *)(((sgNode *)n)->prev))
+.fi
+Walks through a linked list from tail to head, «n» is set to the current node. 
+.PP
+.SS "#define sgForeachUpData(list, n, d)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->tail; \
+      ((n) != NULL) && (((d) = (void *)((sgNode *)n)->data) != NULL); \
+      (d) = (void *)((sgNode *)n)->data, \
+      (n) = (void *)((sgNode *)n)->prev)
+.fi
+Walks through a linked list from tail to head, and «d» is set to n->data. 
+.PP
+.SS "#define sgForeachUpSafe(list, n, m)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->tail, \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->prev : NULL; \
+      (n) != NULL; \
+      (n) = (void *)((sgNode *)m), \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->prev : NULL)
+.fi
+Safely walks through a linked list from tail to head (that means you can remove the current node while looping) «n» is set to the current node and n->next is backupped into «m» before loop body for safe walk-throught when nodes get deleted. 
+.PP
+.SS "#define sgForeachUpSafeData(list, n, m, d)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+for((n) = (void *)(list)->tail, \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->prev : NULL; \
+      ((n) != NULL) && (((d) = (void *)((sgNode *)n)->data) != NULL); \
+      (d) = (void *)((sgNode *)n)->data, \
+      (n) = (void *)((sgNode *)m), \
+      (m) = (void *)((sgNode *)n) != NULL ? (void *)((sgNode *)n)->prev : NULL)
+.fi
+Same as sgForeachUpSafe but sets «d» = n->data. 
+.PP
+.SS "#define sgZeroNode(x)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  ((struct sgNode *)x)->data = NULL; \
+  ((struct sgNode *)x)->next = NULL; \
+  ((struct sgNode *)x)->prev = NULL; \
+} while(0);
+.fi
+Zero a node. 
+.PP
+.SS "#define sgZeroList(x)"
+.PP
+\fBValue:\fP
+.PP
+.nf
+do { \
+  ((struct sgList *)x)->head = NULL; \
+  ((struct sgList *)x)->tail = NULL; \
+  ((struct sgList *)x)->size = 0; \
+} while(0);
+.fi
+Zero a dlink list. 
+.PP
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgNode\fP* sgFindListDelete (\fBsgList\fP * list, void * ptr)"
+.PP
+Find a node in a list and delete it. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlist\fP List on which we'll search for the node 
+.br
+\fIptr\fP Value of the «data» member of the wanted node
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a node when found and deleted, NULL otherwise.
+.RE
+.PP
+

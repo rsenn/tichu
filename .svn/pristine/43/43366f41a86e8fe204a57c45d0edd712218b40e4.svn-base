@@ -1,0 +1,107 @@
+.TH "sgFile: Routines for file searching/opening" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgFile: Routines for file searching/opening \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgPath\fP"
+.br
+.RI "\fIA search path entry. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBPATH_MAX\fP   1024"
+.br
+.RI "\fIPATH_MAX defaults to 1024, which is less than it would be on most systems. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgPath\fP \fBsgPath\fP"
+.br
+.RI "\fIsearch path entry type \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBsgGetFilePath\fP (void)"
+.br
+.RI "\fIGet path of the last found file. \fP"
+.ti -1c
+.RI "\fBsgList\fP * \fBsgGetFilePaths\fP (void)"
+.br
+.RI "\fIGet path list. \fP"
+.ti -1c
+.RI "void \fBsgAddFilePath\fP (const char *dir)"
+.br
+.RI "\fIAdd a search path to the list. \fP"
+.ti -1c
+.RI "void \fBsgClearFilePaths\fP (void)"
+.br
+.RI "\fIClear the whole search path list. \fP"
+.ti -1c
+.RI "FILE * \fBsgOpenFileFp\fP (const char *name, const char *mode)"
+.br
+.RI "\fIOpens a file and returns a stdio file pointer. \fP"
+.ti -1c
+.RI "SDL_RWops * \fBsgOpenFileRWops\fP (const char *name, const char *mode)"
+.br
+.RI "\fIOpens a file and returns an SDL_rwops. \fP"
+.ti -1c
+.RI "char * \fBsgLoadFileText\fP (const char *name)"
+.br
+.RI "\fILoads a files content into a string. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void sgAddFilePath (const char * dir)"
+.PP
+Add a search path to the list. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdir\fP The path to add (preferrably without trailing slash)
+.RE
+.PP
+
+.SS "FILE * sgOpenFileFp (const char * name, const char * mode)"
+.PP
+Opens a file and returns a stdio file pointer. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Filename 
+.br
+\fImode\fP mode as passed to fopen()
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+valid FILE * on success or NULL on error
+.RE
+.PP
+
+.SS "SDL_RWops * sgOpenFileRWops (const char * name, const char * mode)"
+.PP
+Opens a file and returns an SDL_rwops. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIname\fP Filename 
+.br
+\fImode\fP mode as passed to fopen()
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+valid SDL_RWops * on success or NULL on error
+.RE
+.PP
+

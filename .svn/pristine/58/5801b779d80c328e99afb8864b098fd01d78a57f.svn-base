@@ -1,0 +1,545 @@
+.TH "sgWidget: Generic GUI element (abstract)" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgWidget: Generic GUI element (abstract) \- 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgWidgetMethods\fP"
+.br
+.RI "\fIThe methods of a widget. \fP"
+.ti -1c
+.RI "struct \fBsgWidgetType\fP"
+.br
+.RI "\fIDefines widget-specific callbacks etc. \fP"
+.ti -1c
+.RI "struct \fBsgWidgetFace\fP"
+.br
+.RI "\fIWidget surface data. \fP"
+.ti -1c
+.RI "struct \fBsgWidgetPalette\fP"
+.br
+.RI "\fIWidget color palette. \fP"
+.ti -1c
+.RI "struct \fBsgWidget\fP"
+.br
+.RI "\fIAn abstract structure. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgRedrawWidgetBorder\fP(w)   (((w)->status & SG_REDRAW_BORDER) && (w)->face.border)"
+.br
+.RI "\fIChecks if a redraw of the widget border surface is needed. \fP"
+.ti -1c
+.RI "#define \fBsgRedrawWidgetFrame\fP(w)   (((w)->status & SG_REDRAW_FRAME) && (w)->face.frame)"
+.br
+.RI "\fIChecks if a redraw of the widget frame surface is needed. \fP"
+.ti -1c
+.RI "#define \fBsgRedrawWidgetContent\fP(w)   (((w)->status & SG_REDRAW_CONTENT) && (w)->face.content)"
+.br
+.RI "\fIChecks if a redraw of the widget content surface is needed. \fP"
+.ti -1c
+.RI "#define \fBsgFreeWidgetBorder\fP(w)   if(!(w)->face.border){}else{SDL_FreeSurface((w)->face.border);(w)->face.border=NULL;(w)->status|=SG_REDRAW_BORDER;}"
+.br
+.RI "\fIFrees the border face of a widget. \fP"
+.ti -1c
+.RI "#define \fBsgFreeWidgetFrame\fP(w)   if(!(w)->face.frame){}else{SDL_FreeSurface((w)->face.frame);(w)->face.frame=NULL;(w)->status|=SG_REDRAW_FRAME;}"
+.br
+.RI "\fIFrees the frame face of a widget. \fP"
+.ti -1c
+.RI "#define \fBsgFreeWidgetContent\fP(w)   if(!(w)->face.content){}else{SDL_FreeSurface((w)->face.content);(w)->face.content=NULL;(w)->status|=SG_REDRAW_CONTENT;}"
+.br
+.RI "\fIFrees the content face of a widget. \fP"
+.ti -1c
+.RI "#define \fBsgClearWidgetBorder\fP(w)   SDL_FillRect((w)->face.border, NULL, 0)"
+.br
+.RI "\fIClears the border face of a widget. \fP"
+.ti -1c
+.RI "#define \fBsgClearWidgetFrame\fP(w)   SDL_FillRect((w)->face.frame, NULL, 0)"
+.br
+.RI "\fIClears the frame face of a widget. \fP"
+.ti -1c
+.RI "#define \fBsgClearWidgetContent\fP(w)   SDL_FillRect((w)->face.content, NULL, 0)"
+.br
+.RI "\fIClears the content face of a widget. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgWidget\fP \fBsgWidget\fP"
+.br
+.RI "\fIGeneric widget type. \fP"
+.ti -1c
+.RI "typedef \fBsgWidgetFace\fP \fBsgWidgetFace\fP"
+.br
+.RI "\fIWidget surface data type. \fP"
+.ti -1c
+.RI "typedef \fBsgWidgetPalette\fP \fBsgWidgetPalette\fP"
+.br
+.RI "\fIWidget palette data type. \fP"
+.ti -1c
+.RI "typedef \fBsgWidgetType\fP \fBsgWidgetType\fP"
+.br
+.RI "\fIWidget type initializer. \fP"
+.ti -1c
+.RI "typedef \fBsgWidgetMethods\fP \fBsgWidgetMethods\fP"
+.br
+.RI "\fIWidget callback structure. \fP"
+.ti -1c
+.RI "typedef enum \fBsgWidgetStatus\fP \fBsgWidgetStatus\fP"
+.br
+.RI "\fIWidget status flags. \fP"
+.ti -1c
+.RI "typedef int \fBsgWidgetProc\fP (\fBsgWidget\fP *widget, \fBsgEvent\fP event)"
+.br
+.RI "\fIA handler which catches events from parent widgets. \fP"
+.ti -1c
+.RI "typedef void \fBsgWidgetCallback\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIGeneric widget callback. \fP"
+.ti -1c
+.RI "typedef int \fBsgWidgetHandler\fP (\fBsgWidget\fP *widget, SDL_Event *event)"
+.br
+.RI "\fIA handler which processes SDL events. \fP"
+.ti -1c
+.RI "typedef int \fBsgWidgetBlit\fP (\fBsgWidget\fP *widget, SDL_Surface *surface, Sint16 x, Sint16 y)"
+.br
+.RI "\fIBlitting callback. \fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBsgWidgetStatus\fP { \fBSG_RUNNING\fP =  0x00000001, \fBSG_DISABLED\fP =  0x00000002, \fBSG_HIDDEN\fP =  0x00000004, \fBSG_FOCUS\fP =  0x00000008, \fBSG_NOFOCUS\fP =  0x00000010, \fBSG_GRAB\fP =  0x00000020, \fBSG_REDRAW_FRAME\fP =  0x00010000, \fBSG_REDRAW_BORDER\fP =  0x00020000, \fBSG_REDRAW_CONTENT\fP =  0x00040000, \fBSG_REDRAW_SCREEN\fP =  0x00080000, \fBSG_REDRAW_PALETTE\fP =  0x00100000, \fBSG_REDRAW_MOUSE\fP =  0x00200000, \fBSG_REDRAW_NEEDED\fP =  0x003f0000 }"
+.br
+.RI "\fIDefines for widget status. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewWidgetRect\fP (\fBsgWidgetType\fP *type, \fBsgWidget\fP *parent, SDL_Rect rect, const char *caption)"
+.br
+.RI "\fICreates a new widget based on a rectangle. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewWidget\fP (\fBsgWidgetType\fP *type, \fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new widget. \fP"
+.ti -1c
+.RI "void \fBsgFreeWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIFree widget ressources. \fP"
+.ti -1c
+.RI "void \fBsgDeleteWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIFree widget ressources and the widget struct itself (recurses). \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetStatus\fP (\fBsgWidget\fP *widget, int flags)"
+.br
+.RI "\fISet widget status flags. \fP"
+.ti -1c
+.RI "void \fBsgClearWidgetStatus\fP (\fBsgWidget\fP *widget, int flags)"
+.br
+.RI "\fIClear widget status flags. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetProc\fP (\fBsgWidget\fP *widget, \fBsgWidgetProc\fP *proc)"
+.br
+.RI "\fISets the widget procedure. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetPos\fP (\fBsgWidget\fP *widget, Sint16 x, Sint16 y, \fBsgAlign\fP align)"
+.br
+.RI "\fISet the widget position. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetSize\fP (\fBsgWidget\fP *widget, Uint16 w, Uint16 h)"
+.br
+.RI "\fISet the widget dimensions. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetRect\fP (\fBsgWidget\fP *widget, SDL_Rect rect)"
+.br
+.RI "\fISet both, widget position and dimension. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetBorder\fP (\fBsgWidget\fP *widget, int border)"
+.br
+.RI "\fISets the widget border thickness. \fP"
+.ti -1c
+.RI "int \fBsgBlitWidget\fP (\fBsgWidget\fP *widget, SDL_Surface *surface, Sint16 x, Sint16 y)"
+.br
+.RI "\fIBlit widget to the screen. \fP"
+.ti -1c
+.RI "int \fBsgReportWidgetEvent\fP (\fBsgWidget\fP *widget, \fBsgEvent\fP event)"
+.br
+.RI "\fIReport an event to the widget event procedure. \fP"
+.ti -1c
+.RI "void \fBsgRecalcWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIRecalc widget dimensions. \fP"
+.ti -1c
+.RI "void \fBsgSplitWidget\fP (\fBsgWidget\fP *widget, SDL_Rect *newrect, \fBsgEdge\fP edge, int pixels)"
+.br
+.RI "\fISplit widget. \fP"
+.ti -1c
+.RI "void \fBsgClearWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIClears all widget surfaces. \fP"
+.ti -1c
+.RI "void \fBsgCreateWidgetBorder\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fICreates widget border surface (8-bit indexed, color-keyed, source alpha). \fP"
+.ti -1c
+.RI "void \fBsgConvertWidgetBorder\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIConverts widget border surface to display format. \fP"
+.ti -1c
+.RI "void \fBsgCreateWidgetFrame\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fICreates widget frame surface (8-bit indexed, color-keyed, opaque). \fP"
+.ti -1c
+.RI "void \fBsgConvertWidgetFrame\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIConverts widget frame surface to display format. \fP"
+.ti -1c
+.RI "void \fBsgCreateWidgetContent\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fICreates widget content surface (32-bit, alpha layered). \fP"
+.ti -1c
+.RI "void \fBsgConvertWidgetContent\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIConverts widget content surface to display format. \fP"
+.ti -1c
+.RI "void \fBsgCreateWidgetFace\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fICreate widget surfaces. \fP"
+.ti -1c
+.RI "void \fBsgFreeWidgetFace\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIFree widget surfaces. \fP"
+.ti -1c
+.RI "void \fBsgClearWidgetFace\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIClears all widget surfaces. \fP"
+.ti -1c
+.RI "void \fBsgDrawWidgetBorder\fP (\fBsgWidget\fP *widget, SDL_Rect *cutout)"
+.br
+.RI "\fICreates border surface if it doesn't exist and draws a gradient to it. \fP"
+.ti -1c
+.RI "void \fBsgRedrawWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIRenders a widget to its surfaces. \fP"
+.ti -1c
+.RI "int \fBsgHandleWidgetEvent\fP (\fBsgWidget\fP *widget, SDL_Event *event)"
+.br
+.RI "\fIHandles incoming events for the widget. \fP"
+.ti -1c
+.RI "void \fBsgDrawWidget\fP (\fBsgWidget\fP *widget, SDL_Surface *surface)"
+.br
+.RI "\fIDraws a widget to the screen. \fP"
+.ti -1c
+.RI "void \fBsgDisableWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIDisable widget. \fP"
+.ti -1c
+.RI "void \fBsgHideWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIHide and disable widget. \fP"
+.ti -1c
+.RI "void \fBsgShowWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIShow and re-enable widget. \fP"
+.ti -1c
+.RI "void \fBsgEnableWidget\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIRe-enable widget. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetFrameColor\fP (\fBsgWidget\fP *widget, \fBsgColor\fP color)"
+.br
+.RI "\fISet color for the widget frames and generate a new frame palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetBorderColor\fP (\fBsgWidget\fP *widget, \fBsgColor\fP color)"
+.br
+.RI "\fISet color for the widget borders and generate a new border palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetContentColor\fP (\fBsgWidget\fP *widget, \fBsgColor\fP color)"
+.br
+.RI "\fISet color for the widget contents and generate a new content palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetColor\fP (\fBsgWidget\fP *widget, \fBsgColor\fP color)"
+.br
+.RI "\fISet all widget colors and generate new palettes. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetFrameRGB\fP (\fBsgWidget\fP *widget, Uint8 r, Uint8 g, Uint8 b)"
+.br
+.RI "\fISet RGB value for the widget frames and generate a new frame palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetBorderRGB\fP (\fBsgWidget\fP *widget, Uint8 r, Uint8 g, Uint8 b)"
+.br
+.RI "\fISet RGB value for the widget borders and generate a new border palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetContentRGB\fP (\fBsgWidget\fP *widget, Uint8 r, Uint8 g, Uint8 b)"
+.br
+.RI "\fISet RGB value for the widget contents and generate a new content palette. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetRGB\fP (\fBsgWidget\fP *widget, Uint8 r, Uint8 g, Uint8 b)"
+.br
+.RI "\fIGenerate widget palette from RGB value. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetFont\fP (\fBsgWidget\fP *widget, int type, \fBsgFont\fP *font)"
+.br
+.RI "\fISet a widget font. \fP"
+.ti -1c
+.RI "int \fBsgLoadWidgetFont\fP (\fBsgWidget\fP *widget, int type, const char *file)"
+.br
+.RI "\fILoad a bitmap font for the widget. \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetFonts\fP (\fBsgWidget\fP *widget, \fBsgFont\fP *normal, \fBsgFont\fP *bold, \fBsgFont\fP *fixed)"
+.br
+.RI "\fISet all widget fonts. \fP"
+.ti -1c
+.RI "int \fBsgLoadWidgetFonts\fP (\fBsgWidget\fP *widget, const char *normal, const char *bold, const char *fixed)"
+.br
+.RI "\fILoad bitmap fonts for the widget. \fP"
+.ti -1c
+.RI "void \fBsgvSetWidgetCaption\fP (\fBsgWidget\fP *widget, const char *caption, va_list args)"
+.br
+.RI "\fISets the caption of a widget (va_list). \fP"
+.ti -1c
+.RI "void \fBsgSetWidgetCaption\fP (\fBsgWidget\fP *widget, const char *caption,...)"
+.br
+.RI "\fISets the caption of a widget (vararg). \fP"
+.ti -1c
+.RI "char * \fBsgGetWidgetCaption\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIGets the caption of a widget. \fP"
+.ti -1c
+.RI "Uint8 \fBsgGetWidgetMouse\fP (\fBsgWidget\fP *widget, Sint16 *x, Sint16 *y)"
+.br
+.RI "\fIA wrapper to SDL_GetMouseState which returns a position relative to the widget. \fP"
+.ti -1c
+.RI "int \fBsgHasWidgetFocus\fP (\fBsgWidget\fP *widget)"
+.br
+.RI "\fIIndicates whether the widget and all its parents have focus. \fP"
+.ti -1c
+.RI "void \fBsgHandleWidgetHilite\fP (\fBsgWidget\fP *widget, SDL_Rect rect, \fBsgDraw\fP *draw, Sint16 x, Sint16 y)"
+.br
+.RI "\fIHandles motion highlite for a rectangle inside the widget. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgList\fP \fBsgWidgetList\fP"
+.br
+.RI "\fIGlobal list of (root)-widgets. \fP"
+.ti -1c
+.RI "\fBsgList\fP \fBsgWidgetList\fP"
+.br
+.RI "\fIGlobal list of (root)-widgets. \fP"
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBsgWidgetStatus\fP"
+.PP
+Defines for widget status. 
+.PP
+Indicates status of the widget
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISG_RUNNING \fP\fP
+the dialog is running (\fBsgRunDialog()\fP) 
+.TP
+\fB\fISG_DISABLED \fP\fP
+is greyed out and won't receive events 
+.TP
+\fB\fISG_HIDDEN \fP\fP
+is not displayed and won't receive events 
+.TP
+\fB\fISG_FOCUS \fP\fP
+has focus 
+.TP
+\fB\fISG_NOFOCUS \fP\fP
+can't get focus 
+.TP
+\fB\fISG_GRAB \fP\fP
+widget grabs the focus 
+.TP
+\fB\fISG_REDRAW_FRAME \fP\fP
+frame surface of the widget must be redrawn 
+.TP
+\fB\fISG_REDRAW_BORDER \fP\fP
+border surface of the widget must be redrawn 
+.TP
+\fB\fISG_REDRAW_CONTENT \fP\fP
+content surface of the widget must be redrawn 
+.TP
+\fB\fISG_REDRAW_SCREEN \fP\fP
+widget must be redrawn to screen 
+.TP
+\fB\fISG_REDRAW_PALETTE \fP\fP
+widget must change palette 
+.TP
+\fB\fISG_REDRAW_MOUSE \fP\fP
+mouse pointer must be redrawn 
+.TP
+\fB\fISG_REDRAW_NEEDED \fP\fP
+is a redraw needed? 
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgWidget\fP * sgNewWidgetRect (\fBsgWidgetType\fP * type, \fBsgWidget\fP * parent, SDL_Rect rect, const char * caption)"
+.PP
+Creates a new widget based on a rectangle. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItype\fP widget type structure 
+.br
+\fIparent\fP parent widget 
+.br
+\fIrect\fP rectangle of the widget relative to the parent 
+.br
+\fIcaption\fP text
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewWidget (\fBsgWidgetType\fP * type, \fBsgWidget\fP * parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItype\fP widget type structure 
+.br
+\fIparent\fP parent widget 
+.br
+\fIx\fP x-position relative to the parent 
+.br
+\fIy\fP y-position of the button relative to the parent 
+.br
+\fIw\fP width 
+.br
+\fIh\fP height 
+.br
+\fIcaption\fP text
+.RE
+.PP
+
+.SS "void sgSetWidgetColor (\fBsgWidget\fP * widget, \fBsgColor\fP color)"
+.PP
+Set all widget colors and generate new palettes. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP widget which will have its color changed 
+.br
+\fIcolor\fP new widget color
+.RE
+.PP
+
+.SS "void sgSetWidgetFont (\fBsgWidget\fP * widget, int type, \fBsgFont\fP * font)"
+.PP
+Set a widget font. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP the widget which will have fonts loaded 
+.br
+\fItype\fP font face type (SG_FONT_NORMAL, SG_FONT_BOLD, SG_FONT_FIXED) 
+.br
+\fIfont\fP the specified font face
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns 0 on success, -1 on error
+.RE
+.PP
+
+.SS "int sgLoadWidgetFont (\fBsgWidget\fP * widget, int type, const char * file)"
+.PP
+Load a bitmap font for the widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP the widget which will have fonts loaded 
+.br
+\fItype\fP font face type (SG_FONT_NORMAL, SG_FONT_BOLD, SG_FONT_FIXED) 
+.br
+\fIfile\fP GIF file with the specified font face
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns 0 on success, -1 on error
+.RE
+.PP
+
+.SS "void sgSetWidgetFonts (\fBsgWidget\fP * widget, \fBsgFont\fP * normal, \fBsgFont\fP * bold, \fBsgFont\fP * fixed)"
+.PP
+Set all widget fonts. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP the widget which will have fonts loaded 
+.br
+\fInormal\fP «normal» font face 
+.br
+\fIbold\fP «bold» font face 
+.br
+\fIfixed\fP «fixed» font face
+.RE
+.PP
+
+.SS "int sgLoadWidgetFonts (\fBsgWidget\fP * widget, const char * normal, const char * bold, const char * fixed)"
+.PP
+Load bitmap fonts for the widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP the widget which will have fonts loaded 
+.br
+\fInormal\fP GIF file with the «normal» font face 
+.br
+\fIbold\fP GIF file with the «bold» font face 
+.br
+\fIfixed\fP GIF file with the «fixed» font face
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+returns 0 on success, -1 on error
+.RE
+.PP
+
+.SS "void sgvSetWidgetCaption (\fBsgWidget\fP * widget, const char * caption, va_list args)"
+.PP
+Sets the caption of a widget (va_list). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP widget which will have the caption changed 
+.br
+\fIcaption\fP format string 
+.br
+\fIargs\fP va_list for vsnprintf
+.RE
+.PP
+
+.SS "void sgSetWidgetCaption (\fBsgWidget\fP * widget, const char * caption,  ...)"
+.PP
+Sets the caption of a widget (vararg). 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIwidget\fP widget which will have the caption changed 
+.br
+\fIcaption\fP format string 
+.br
+\fI...\fP arguments
+.RE
+.PP
+

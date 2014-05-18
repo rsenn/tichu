@@ -1,0 +1,59 @@
+# $Id: Makefile.in,v 1.20 2005/05/21 22:36:09 smoli Exp $
+# ===========================================================================
+#
+# Makefile for tichu/src subdirectory
+#
+# relative directories
+# ---------------------------------------------------------------------------
+srcdir       = @srcdir@
+top_srcdir   = @top_srcdir@
+top_builddir = @top_builddir@
+thisdir      = @thisdir@
+
+VPATH        = $(srcdir)
+
+# include global make configuration
+# ---------------------------------------------------------------------------
+include $(top_builddir)config.mk
+
+# configuration for this directory
+# ---------------------------------------------------------------------------
+IMAGES = 1-4.png \
+         1.png \
+         2.png \
+         3.png \
+         4.png \
+         5.png \
+         fun.gif \
+         fun.png \
+         fun_d.gif \
+         icon.png \
+         liga.gif \
+         liga.png \
+         liga_d.gif \
+         turnier.gif \
+         turnier.png \
+         turnier_d.gif 
+         
+INIS = cards.ini \
+       playlist.ini \
+       client.ini
+
+# targets for this directory
+# ---------------------------------------------------------------------------
+all: Makefile 
+install: install-data
+
+# distribution config
+# ---------------------------------------------------------------------------
+FILES += $(IMAGES) $(INIS)
+
+# install config
+# ---------------------------------------------------------------------------
+shared_DATA = $(IMAGES) $(INIS)
+shared_PREFIX = $(PREFIX)/data
+
+# include global make targets
+# ---------------------------------------------------------------------------
+include $(top_builddir)build.mk
+

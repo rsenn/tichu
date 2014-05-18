@@ -1,0 +1,278 @@
+.TH "sgButton: Pushbutton widget" 3 "5 Sep 2006" "Version 2.0.0rc4" "libsgui" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sgButton: Pushbutton widget \- The button widget consists of an elevated area with a caption.  
+
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsgButton\fP"
+.br
+.RI "\fIA specialised structure for a button widget. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBsgButton\fP(w)   (w)->data.button"
+.br
+.RI "\fIA macro to access the specialised button structure. \fP"
+.ti -1c
+.RI "#define \fBsgGetButtonState\fP(w)   (!!(\fBsgButton\fP(w)->draw & SG_DRAW_INVERSE))"
+.br
+.RI "\fIa macro to access the button state \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBsgButton\fP \fBsgButton\fP"
+.br
+.RI "\fIData type for button specific storage. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewButtonSplitted\fP (\fBsgWidget\fP *based, \fBsgEdge\fP edge, int pixels, const char *caption)"
+.br
+.RI "\fICreates a new button widget by splitting another. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewButtonGrouped\fP (\fBsgWidget\fP *group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new button widget and adds it to a group. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewButtonRect\fP (\fBsgWidget\fP *parent, SDL_Rect rect, const char *caption)"
+.br
+.RI "\fICreates a new button widget from a rectangle. \fP"
+.ti -1c
+.RI "\fBsgWidget\fP * \fBsgNewButton\fP (\fBsgWidget\fP *parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char *caption)"
+.br
+.RI "\fICreates a new button widget. \fP"
+.ti -1c
+.RI "void \fBsgRecalcButton\fP (\fBsgWidget\fP *button)"
+.br
+.RI "\fIRecalculates internal button rectangles. \fP"
+.ti -1c
+.RI "void \fBsgRedrawButton\fP (\fBsgWidget\fP *button)"
+.br
+.RI "\fIRedraws button widget. \fP"
+.ti -1c
+.RI "int \fBsgHandleButtonEvent\fP (\fBsgWidget\fP *button, SDL_Event *event)"
+.br
+.RI "\fIHandles an incoming event for a button widget. \fP"
+.ti -1c
+.RI "int \fBsgSetButtonState\fP (\fBsgWidget\fP *button, int pushed)"
+.br
+.RI "\fISets the state of a button. \fP"
+.ti -1c
+.RI "void \fBsgSetButtonPict\fP (\fBsgWidget\fP *button, \fBsgPict\fP *pict)"
+.br
+.RI "\fISets the pictogram for a button. \fP"
+.ti -1c
+.RI "int \fBsgLoadButtonImage\fP (\fBsgWidget\fP *button, const char *file, \fBsgEdge\fP edge, \fBsgAlign\fP align)"
+.br
+.RI "\fILoads the image for a button. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgButtonType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the button widget. \fP"
+.ti -1c
+.RI "\fBsgWidgetType\fP \fBsgButtonType\fP"
+.br
+.RI "\fIConfiguration and initial methods of the button widget. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The button widget consists of an elevated area with a caption. 
+.PP
+If the user clicks on the elevated area it will be sunken and generate an event when it is released. When the button has focus it will display transparent borders.
+.SH "Function Documentation"
+.PP 
+.SS "\fBsgWidget\fP * sgNewButtonSplitted (\fBsgWidget\fP * based, \fBsgEdge\fP edge, int pixels, const char * caption)"
+.PP
+Creates a new button widget by splitting another. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbased\fP widget which we'll split 
+.br
+\fIedge\fP at which edge «based» will be splitted 
+.br
+\fIpixels\fP how many pixels to split off 
+.br
+\fIcaption\fP initial button text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created button or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewButtonGrouped (\fBsgWidget\fP * group, \fBsgEdge\fP edge, \fBsgAlign\fP align, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new button widget and adds it to a group. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIgroup\fP group the editbox will be added to 
+.br
+\fIedge\fP at which edge «group» will be splitted 
+.br
+\fIalign\fP alignment of the button inside the group 
+.br
+\fIw\fP width of the button 
+.br
+\fIh\fP height of the button 
+.br
+\fIcaption\fP initial button text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created button or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewButtonRect (\fBsgWidget\fP * parent, SDL_Rect rect, const char * caption)"
+.PP
+Creates a new button widget from a rectangle. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP parent widget the button will be added to 
+.br
+\fIrect\fP dimensions of the new button 
+.br
+\fIcaption\fP initial button text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created button or NULL on error.
+.RE
+.PP
+
+.SS "\fBsgWidget\fP * sgNewButton (\fBsgWidget\fP * parent, Sint16 x, Sint16 y, Uint16 w, Uint16 h, const char * caption)"
+.PP
+Creates a new button widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent\fP widget which will contain the button 
+.br
+\fIx\fP x-position of the button relative to the parent 
+.br
+\fIy\fP y-position of the button relative to the parent 
+.br
+\fIw\fP width of the button 
+.br
+\fIh\fP height of the button 
+.br
+\fIcaption\fP initial button text
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the newly created button or NULL on error
+.RE
+.PP
+
+.SS "void sgRecalcButton (\fBsgWidget\fP * button)"
+.PP
+Recalculates internal button rectangles. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP button to recalculate
+.RE
+.PP
+
+.SS "void sgRedrawButton (\fBsgWidget\fP * button)"
+.PP
+Redraws button widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP button widget to redraw
+.RE
+.PP
+
+.SS "int sgHandleButtonEvent (\fBsgWidget\fP * button, SDL_Event * event)"
+.PP
+Handles an incoming event for a button widget. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP button widget which receives the event 
+.br
+\fIevent\fP an SDL_Event structure from SDL_PollEvent()
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+1 if some action has taken place, 0 otherwise
+.RE
+.PP
+
+.SS "int sgSetButtonState (\fBsgWidget\fP * button, int pushed)"
+.PP
+Sets the state of a button. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP the button widget which will be changed 
+.br
+\fIpushed\fP new state of the button
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 1 when the value has changed, 0 otherwise
+.RE
+.PP
+
+.SS "void sgSetButtonPict (\fBsgWidget\fP * button, \fBsgPict\fP * pict)"
+.PP
+Sets the pictogram for a button. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbutton\fP the button widget which will be changed 
+.br
+\fIpict\fP new pictogram
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBsgWidgetType\fP \fBsgButtonType\fP"
+.PP
+\fBInitial value:\fP
+.PP
+.nf
+
+{
+  .name = 'sgButton',
+  .size = sizeof(struct sgButton),
+  .methods =
+  {
+    .recalc = sgRecalcButton,
+    .redraw = sgRedrawButton,
+    .handler = sgHandleButtonEvent,
+    .blit = sgBlitWidget,
+    .delete = sgDeleteButton
+  }
+}
+.fi
+Configuration and initial methods of the button widget. 
+.PP
+

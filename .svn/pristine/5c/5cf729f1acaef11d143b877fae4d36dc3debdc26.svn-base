@@ -1,0 +1,18 @@
+; $Id: deep-sky.cur,v 1.3 2005/05/14 08:53:08 smoli Exp $
+;
+; The Graphics for these cursors are taken from
+; the "DeepSky Cursor Theme" for X11 by Luís Camacho 
+
+deep-sky.png:Deep Sky
+
+; Format is as following:
+;
+; <type>:<x>,<y>/<w>x<h>/<hotx>|<hoty>
+;
+0:0,0/58x47/12|12
+1:116,94/58x47/33|25
+2:58,94/58x47/30|25
+3:58,47/58x47/30|24
+4:0,47/58x47/30|24
+5:0,94/58x47/30|25
+6:58,0/58x47/26|22
