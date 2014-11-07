@@ -2,7 +2,7 @@
 /* include/libchaos/config.h.in.  Generated from configure.in by autoheader.  */
 
 /* Creation time of this server */
-#define CREATION "Sun Apr 27 19:23:46 CEST 2014"
+#define CREATION "Sun Oct 26 13:09:07 CET 2014"
 
 /* Define your machines endian */
 #define ENDIAN ENDIAN_LIL
@@ -29,13 +29,13 @@
 #define HAVE_LIBSSL 1
 
 /* Define to 1 if you have the `z' library (-lz). */
-/* #undef HAVE_LIBZ */
+#define HAVE_LIBZ 1
 
 /* Define to 1 if you have the <memory.h> header file. */
 /* #undef HAVE_MEMORY_H */
 
 /* Define this if you have MySQL */
-/* #undef HAVE_MYSQL */
+#define HAVE_MYSQL "1"
 
 /* Define to 1 if you have the <openssl/opensslv.h> header file. */
 #define HAVE_OPENSSL_OPENSSLV_H 1
@@ -86,7 +86,7 @@
 #define PACKAGE_VERSION "2.1.0"
 
 /* Platform this server runs on */
-#define PLATFORM "Linux gatling.workgroup 3.13.10-200.fc20.x86_64 #1 SMP Mon Apr 14 20:34:16 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux"
+#define PLATFORM "Linux localhost.localdomain 3.11.10-301.fc20.x86_64 #1 SMP Thu Dec 5 14:01:17 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux"
 
 /* Define to 1 if you have the ANSI C header files. */
 /* #undef STDC_HEADERS */
